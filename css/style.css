@@ -1,0 +1,199 @@
+/* ---------- PALETTE ---------- */
+/* 810F29 (bordeaux), 2F0610 (très foncé), 000000, FFFFFF,
+   AAE9EE, 6A7282, 99A1AF, 991F3B, E7FBFB */
+   :root {
+    --bg-main: #E7FBFB;
+    --bg-sidebar: #FFFFFF;
+    --bg-topbar: #FFFFFF;
+    --bg-active: #810F29;
+    --text-dark: #2F0610;
+    --text-muted: #99A1AF;
+    --accent: #991F3B;
+    --counter: #810F29;
+    --border-soft: #F4F4F6;
+  }
+  
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-dark);
+  }
+  
+  /* ---------- TOPBAR ---------- */
+  
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-topbar);
+    border-bottom: 1px solid var(--border-soft);
+    z-index: 10;
+  }
+  
+  .logo {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.4px;
+    color: var(--accent);
+  }
+  
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .topbar-icons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .circle-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .topbar-icon-img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+  
+  .signout-btn {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+  }
+  
+  /* ---------- LAYOUT ---------- */
+  
+  .layout {
+    display: flex;
+    height: calc(100vh - 64px);
+    margin-top: 64px;
+  }
+  
+  /* ---------- SIDEBAR ---------- */
+  
+  .sidebar {
+    width: 210px;
+    background: var(--bg-sidebar);
+    padding: 25px 18px;
+    border-right: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .nav-menu {
+    margin-bottom: 40px;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 14px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link.active {
+    background: var(--bg-active);
+    color: #FFFFFF;
+  }
+  
+  /* icône PNG dans le menu */
+  .nav-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+  
+  /* ---------- MUSIC BOARDS ---------- */
+  
+  .sidebar-section {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 20px;
+  }
+  
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #810F29;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  
+  .tag-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  
+  .tag-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  /* icône PNG pour les boards */
+  .tag-img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+  }
+  
+  .tag-name {
+    color: var(--text-dark);
+  }
+  
+  .tag-count {
+    font-size: 11px;
+    color: var(--counter);
+  }
+  
+  /* ---------- MAIN PANEL ---------- */
+  
+  .main-area {
+    flex: 1;
+    padding: 16px 24px 24px 24px;
+  }
+  
+  .white-panel {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 32px;
+  }
