@@ -197,3 +197,116 @@
     background: #FFFFFF;
     border-radius: 32px;
   }
+
+  /* ---------- AUTH PAGES (Connexion/Inscription) ---------- */
+
+.auth-body {
+    background: var(--bg-main); /* Le bleu clair E7FBFB */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-box {
+    background: #FFFFFF;
+    padding: 40px;
+    border-radius: 32px; /* Rappel du white-panel */
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.auth-logo {
+    color: var(--accent); /* Le bordeaux 991F3B */
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.auth-form {
+    margin-top: 24px;
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    font-family: inherit;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-active); /* Le bordeaux 810F29 */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 999px; /* Bouton arrondi comme tes nav-links */
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.auth-switch {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.auth-switch a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.back-home {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.form-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 25px 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: var(--text-dark);
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 12px;
+    font-family: inherit;
+    resize: none;
+}
