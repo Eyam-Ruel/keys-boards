@@ -29,13 +29,16 @@ class VueAuth {
         echo $this->getPied();
     }
 
-    public function afficherInscription() {
+    public function afficherInscription($error = null) {
         echo $this->getEntete("Join LinkUp");
         echo '
         <div class="auth-container">
             <div class="auth-box" style="max-width: 600px;">
                 <a href="index.php" class="back-home">< Back to home</a>
                 <h1 class="auth-logo">LinkUp</h1>
+                
+                ' . ($error ? '<p style="color: #810F29; background: #FFF0F0; padding: 12px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; border: 1px solid #FFDADA;">⚠️ ' . htmlspecialchars($error) . '</p>' : '') . '
+
                 <p class="auth-subtitle">Join the intergenerational music community</p>
                 
                 <form action="index.php?action=doRegister" method="post" enctype="multipart/form-data" class="auth-form">
@@ -85,7 +88,7 @@ class VueAuth {
                     </div>
 
                     <div class="checkbox-group">
-                        <input type="checkbox" id="terms" required>
+                        <input type="checkbox" name="terms" id="terms" required> 
                         <label for="terms">I accept the terms and conditions and the privacy policy.</label>
                     </div>
                     

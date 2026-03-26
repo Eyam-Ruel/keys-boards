@@ -41,20 +41,21 @@ switch ($action) {
         $vue->afficherConnexion();
         break;
 
-    case 'inscription':
-        $vue = new VueAuth();
-        $vue->afficherInscription();
-        break;
-
-    // --- ACTIONS LOGIQUES (Traitement des formulaires) ---
-    case 'doRegister':
-        $res = $userModel->inscrire($_POST, $_FILES);
-        if ($res === "success") {
-            header("Location: index.php?action=connexion&reg=ok");
-        } else {
-            header("Location: index.php?action=inscription&error=" . urlencode($res));
-        }
-        exit();
+        case 'inscription':
+            $error = isset($_GET['error']) ? $_GET['error'] : null;
+            $vue = new VueAuth();
+            $vue->afficherInscription($error); // On passe l'erreur à la fonction
+            break;
+        
+        case 'doRegister':
+            $res = $userModel->inscrire($_POST, $_FILES);
+            if ($res === "success") {
+                header("Location: index.php?action=connexion&reg=ok");
+            } else {
+                // On renvoie vers le formulaire avec le texte de l'erreur dans l'URL
+                header("Location: index.php?action=inscription&error=" . urlencode($res));
+            }
+            exit();
 
     case 'doConnect':
         if ($userModel->connecter($_POST['email'], $_POST['pass'])) {
