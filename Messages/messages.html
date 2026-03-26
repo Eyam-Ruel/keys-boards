@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkUp – Messages</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="messages.css">
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header>
+    <span class="logo">LinkUp</span>
+    <div class="header-right">
+      <div class="icon-btn" title="Toggle Theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </div>
+      <div class="icon-btn" title="Language">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <button class="btn-signout">Sign out</button>
+    </div>
+  </header>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </div>
+      <div class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Explore</span>
+      </div>
+      <div class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span>Notifications</span>
+      </div>
+      <div class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Follow</span>
+      </div>
+      <div class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Messages</span>
+      </div>
+      <div class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Agenda</span>
+      </div>
+      <div class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile</span>
+      </div>
+
+      <div class="nav-section">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Music Boards
+      </div>
+      <div class="nav-tag">
+        <span>#Jazz</span>
+        <span class="count">12.5k</span>
+      </div>
+      <div class="nav-tag">
+        <span>#MAO</span>
+        <span class="count">8.2k</span>
+      </div>
+      <div class="nav-tag">
+        <span>#Vinyl</span>
+        <span class="count">15.3k</span>
+      </div>
+      <div class="nav-tag">
+        <span>#Classical</span>
+        <span class="count">6.7k</span>
+      </div>
+      <div class="nav-tag">
+        <span>#Rock</span>
+        <span class="count">18.9k</span>
+      </div>
+      <div class="nav-tag">
+        <span>#Electro</span>
+        <span class="count">11.1k</span>
+      </div>
+    </aside>
+
+    <!-- MESSAGES AREA -->
+    <main class="messages-container">
+
+      <!-- Conversation List -->
+      <section class="conversation-sidebar">
+        <div class="list-header">
+          <h2>Messages</h2>
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Search conversations...">
+          </div>
+        </div>
+        <div class="conv-list">
+          <!-- Sophie Martir -->
+          <div class="conv-item active" onclick="selectChat('sophie', this)">
+            <div class="conv-avatar">
+              <img src="assets/avatar_sophie.png" alt="Sophie Martin">
+            </div>
+            <div class="conv-info">
+              <div class="conv-info-top">
+                <span class="conv-name">Sophie Martin</span>
+                <span class="conv-time">2h ago</span>
+              </div>
+              <p class="conv-preview">That sounds great! I'd love to collaborate on that jazz piece.</p>
+              <span class="conv-badge new">2 new</span>
+            </div>
+          </div>
+          <!-- Robert Chen -->
+          <div class="conv-item" onclick="selectChat('robert', this)">
+            <div class="conv-avatar">
+              <img src="assets/avatar_robert.png" alt="Robert Chen">
+            </div>
+            <div class="conv-info">
+              <div class="conv-info-top">
+                <span class="conv-name">Robert Chen</span>
+                <span class="conv-time">1d ago</span>
+              </div>
+              <p class="conv-preview">Hey! I saw your post about vinyl collecting.</p>
+              <span class="conv-badge pending">Pending request</span>
+            </div>
+          </div>
+          <!-- Emma Williams -->
+          <div class="conv-item" onclick="selectChat('emma', this)">
+            <div class="conv-avatar">
+              <img src="assets/avatar_emma.png" alt="Emma Williams">
+            </div>
+            <div class="conv-info">
+              <div class="conv-info-top">
+                <span class="conv-name">Emma Williams</span>
+                <span class="conv-time">2d ago</span>
+              </div>
+              <p class="conv-preview">Thanks for the guitar tips yesterday!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat Area -->
+      <section class="chat-area" id="chatArea">
+        <div class="chat-header">
+          <div class="chat-user">
+            <div class="chat-user-avatar">
+              <img id="headerAvatar" src="assets/avatar_sophie.png" alt="">
+            </div>
+            <div class="chat-user-info">
+              <h3 id="headerName">Sophie Martin</h3>
+              <p id="headerUsername">@sophiemartin</p>
+            </div>
+          </div>
+          <div class="icon-btn" title="More Options">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="messagesLog">
+          <!-- Messages dynamically loaded here -->
+        </div>
+
+        <div class="chat-footer">
+          <div class="input-container">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button class="btn-send" onclick="sendMessage()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="messages.js"></script>
+</body>
+</html>
