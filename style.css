@@ -485,12 +485,19 @@ h3 {
     margin: 35px 0;
 }
 
+.public--videoSection--title{
+    display: flex;
+    justify-content: center;
+    background-color: #E7FBFB; 
+    font-family: 'Monsterrat', sans-serif;
+    color: rgb(var(--red-text));
+}
 
 
 .video--container {
     position: relative;
     width: 100vw;
-    margin: 20px auto;
+    margin: 0 auto 20px auto;
     cursor: pointer;
     border-radius: 12px;
     overflow: hidden; 
@@ -498,7 +505,7 @@ h3 {
 
 .video {
     width: 100%;
-    display: block; /* Évite l'espace fantôme sous la vidéo */
+    display: block;
 }
 
 .play-btn {
@@ -689,4 +696,27 @@ strong {
 
 .white{
     color: white;
+}
+
+.public--whoSection--bottom{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    color: rgb(var(--darkred));
+    font-family: 'Monsterrat', sans-serif;
+}
+
+.community--button{
+    font-family: 'Monsterrat', sans-serif;
+font-weight: 600;
+color: white;
+background-color: #667FE6;
+border: none;
+padding: 15px;
+font-size: 18px;
+display: inline-block;
+margin: 10px;
+border-radius: 12px;
+width: fit-content;
+align-self: center;
 }
