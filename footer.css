@@ -1,0 +1,72 @@
+.site--footer {
+    border-top: 1px solid rgba(var(--darkred), 0.15);
+
+    padding-top: 50px;
+    background-color: white;
+    font-family: "Jost", sans-serif;
+
+}
+
+
+.footer--main_content {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+.footer--column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.footer--column-legal {
+    max-width: 220px;
+}
+
+.footer--column h3,
+.footer--brand {
+    color: rgb(var(--darkred));
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer--column p,
+.footer--column a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: color 0.2s;
+}
+
+.footer--column a:hover {
+    color: rgb(var(--darkred));
+
+}
+
+
+.footer--column ul {
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer--bottom {
+    border-top: 1px solid rgba(var(--darkred), 0.15);
+
+    text-align: center;
+    padding: 30px 0;
+    margin: 0 115px;
+
+}
+
+.footer--bottom p {
+    color: #333;
+    font-size: 0.9rem;
+}
