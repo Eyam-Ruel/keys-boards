@@ -310,3 +310,396 @@ textarea {
     font-family: inherit;
     resize: none;
 }
+
+
+
+/* ===== EXPLORE PAGE ===== */
+
+.kb-explore-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kb-page-heading__title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.kb-page-heading__subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Tabs */
+.kb-explore-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.kb-explore-tabs__item {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--border-soft);
+  border: none;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+.kb-explore-tabs__item--active {
+  background: var(--bg-active);
+  color: #FFFFFF;
+}
+
+/* Layout */
+.kb-explore-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Cards grid */
+.kb-explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Musician Card */
+.kb-musician-card {
+  background: var(--bg-sidebar);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-soft);
+}
+
+.kb-musician-card__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.kb-musician-card__identity {
+  display: flex;
+  gap: 12px;
+}
+
+.kb-musician-card__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--border-soft);
+}
+
+.kb-musician-card__name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.kb-musician-card__username,
+.kb-musician-card__location {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.kb-musician-card__description {
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.kb-musician-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.kb-tag {
+  background: var(--border-soft);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.kb-musician-card__followers {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* Follow button */
+.kb-follow-button {
+  background: var(--bg-active);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Map panel */
+.kb-map-panel {
+  background: var(--bg-sidebar);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-soft);
+}
+
+.kb-map-panel__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.kb-map-panel__title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.kb-map-panel__button {
+  background: var(--accent);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.kb-map-panel__map {
+  height: 300px;
+  background: var(--border-soft);
+  border-radius: 10px;
+}
+
+/* ===== PROFILE PAGE ===== */
+
+.kb-profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kb-profile-card {
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 700px;
+}
+
+.kb-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kb-profile-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.kb-profile-form__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kb-profile-form__input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-dark);
+  background: #FFFFFF;
+}
+
+.kb-profile-form__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  margin-top: 6px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.kb-profile-form__suggestion-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-dark);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.kb-profile-form__suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.kb-profile-form__suggestion-item:hover {
+  background: var(--bg-main);
+}
+
+.kb-profile-form__button {
+  align-self: flex-start;
+  background: var(--bg-active);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kb-explore-tabs__item {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.kb-follow-button--following {
+  background: var(--bg-main);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+
+/* ===== NOTIFICATIONS PAGE ===== */
+
+.kb-notifications-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kb-notifications-card {
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.kb-notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.kb-notification:last-child {
+  border-bottom: none;
+}
+
+.kb-notification__left {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+}
+
+.kb-notification__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--border-soft);
+  flex-shrink: 0;
+}
+
+.kb-notification__content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kb-notification__text {
+  font-size: 14px;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.kb-notification__username {
+  color: var(--text-muted);
+  margin-left: 6px;
+  margin-right: 4px;
+}
+
+.kb-notification__time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.kb-notification__right {
+  flex-shrink: 0;
+}
+
+.kb-notification__button {
+  background: var(--bg-active);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===== extra ===== */
+
+.kb-notification {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-notification:hover {
+  background: #fcfcfd;
+  transform: translateY(-1px);
+}
+
+.kb-notification--unread {
+  background: #f9fcfc;
+}
+
+.kb-notification--unread .kb-notification__text strong {
+  color: var(--accent);
+}
+
+.kb-notification__button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-notification__button:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.kb-explore-tabs__item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.kb-follow-button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-follow-button:hover {
+  transform: translateY(-1px);
+}
+
+.kb-map-panel__button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-map-panel__button:hover {
+  background: var(--bg-active);
+  transform: translateY(-1px);
+}
+
+.kb-profile-form__button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-profile-form__button:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}

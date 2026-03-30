@@ -17,8 +17,10 @@ switch ($action) {
 
     // --- VUES PRINCIPALES ---
     case 'explore':
-        $vue = new VueExplore();
-        $vue->setActionActive('explore'); // Allume le bouton Explore dans le menu
+        $users = $userModel->getUsersWithCoordinates();
+        $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
+        $vue = new VueExplore($users, $tab);
+        $vue->setActionActive('explore');
         $vue->afficher();
         break;
 
@@ -27,14 +29,24 @@ switch ($action) {
         $vue->setActionActive('agenda'); // Allume le bouton Agenda dans le menu
         $vue->afficher();
         break;
-
+    
+        case 'notif':
+        $vue = new VueNotif();
+        $vue->setActionActive('notif');
+        $vue->afficher();
+        break;
+    
     case 'profil':
-        // Si tu as créé une VueProfil.class.php
         $vue = new VueProfil();
         $vue->setActionActive('profil');
         $vue->afficher();
         break;
 
+    case 'saveProfileLocation':
+        $userModel->saveUserLocation($_POST['address'], $_POST['latitude'], $_POST['longitude']);
+        header("Location: index.php?action=profil&saved=1");
+    exit();
+    
     // --- AUTHENTIFICATION ---
     case 'connexion':
         $vue = new VueAuth();

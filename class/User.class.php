@@ -96,4 +96,39 @@ class User {
         }
         return false; 
     }
+    
+    public function getUsersWithCoordinates() {
+    $pdo = Database::getLink();
+
+    $sql = "SELECT id, display_name, pseudo, lat, lng
+            FROM users
+            WHERE lat IS NOT NULL
+              AND lng IS NOT NULL
+              AND lat != ''
+              AND lng != ''";
+
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function saveUserLocation($address, $latitude, $longitude) {
+    $pdo = Database::getLink();
+    $userId = $_SESSION['user_id'];
+
+    if (!$userId) {
+        die("No user connected.");
+    }
+
+    $sql = "UPDATE users
+            SET city = :address, lat = :lat, lng = :lng
+            WHERE id = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':address' => $address,
+        ':lat' => $latitude,
+        ':lng' => $longitude,
+        ':id' => $userId
+    ]);
+}
 }

@@ -18,7 +18,9 @@ class VueBase {
             <title>' . $this->titre . '</title>
             <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="css/style.css">
-        </head>
+            <link rel="stylesheet" href="css/leaflet.css">
+            <script src="js/leaflet.js"></script>
+         </head>
         <body>
 
         <header class="topbar">
@@ -47,7 +49,7 @@ class VueBase {
                         <img src="./img/icons/Icon.png" alt="" class="nav-img">
                         <span class="nav-label">Explore</span>
                     </a>
-                    <a href="#" class="nav-link ' . ($this->actionActive == 'notif' ? 'active' : '') . '">
+                    <a href="index.php?action=notif" class="nav-link ' . ($this->actionActive == 'notif' ? 'active' : '') . '">
                         <img src="./img/icons/Icon.png" alt="" class="nav-img">
                         <span class="nav-label">Notifications</span>
                     </a>
@@ -122,17 +124,114 @@ class VueBase {
                 </div>
             </main>
         </div>
-
         <script>
-            // JS pour changer la couleur au clic instantanément
-            document.querySelectorAll(".nav-link").forEach(link => {
-                link.addEventListener("click", function() {
-                    document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-                    this.classList.add("active");
-                });
-            });
-        </script>
+window.onload = function () {
+    var mapEl = document.getElementById("map");
+    if (!mapEl) return;
 
+    if (typeof L === "undefined") {
+        alert("Leaflet not loaded");
+        return;
+    }
+
+    var map = L.map("map").setView([41.3275, 19.8187], 10);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    var dataEl = document.getElementById("map-users-data");
+    var users = [];
+
+    if (dataEl) {
+        try {
+            users = JSON.parse(dataEl.dataset.users || "[]");
+        } catch (e) {
+            console.error("Invalid users JSON", e);
+        }
+    }
+
+    if (users.length > 0) {
+        var bounds = [];
+
+        users.forEach(function(user) {
+            var lat = parseFloat(user.latitude);
+            var lng = parseFloat(user.longitude);
+
+            if (!isNaN(lat) && !isNaN(lng)) {
+                var marker = L.marker([lat, lng]).addTo(map);
+
+                marker.bindPopup(
+                    "<strong>" + (user.name || "Unknown") + "</strong><br>" +
+                    (user.instruments || "Musician")
+                );
+
+                bounds.push([lat, lng]);
+            }
+        });
+
+        if (bounds.length > 0) {
+            map.fitBounds(bounds, { padding: [30, 30] });
+        }
+    } else {
+        L.marker([41.3275, 19.8187]).addTo(map)
+            .bindPopup("No users with coordinates yet")
+            .openPopup();
+    }
+
+    setTimeout(function () {
+        map.invalidateSize();
+    }, 300);
+};
+</script>
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+    var addressInput = document.getElementById("address-input");
+    var suggestionsBox = document.getElementById("address-suggestions");
+    var latitudeInput = document.getElementById("latitude");
+    var longitudeInput = document.getElementById("longitude");
+
+    if (!addressInput || !suggestionsBox || !latitudeInput || !longitudeInput) {
+        return;
+    }
+
+    addressInput.addEventListener("input", function () {
+        var query = addressInput.value.trim();
+
+        if (query.length < 3) {
+            suggestionsBox.innerHTML = "";
+            return;
+        }
+
+        fetch("https://nominatim.openstreetmap.org/search?format=json&limit=5&q=" + encodeURIComponent(query))
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                suggestionsBox.innerHTML = "";
+
+                data.forEach(function (place) {
+                    var item = document.createElement("div");
+                    item.className = "kb-profile-form__suggestion-item";
+                    item.textContent = place.display_name;
+
+                    item.addEventListener("click", function () {
+                        addressInput.value = place.display_name;
+                        latitudeInput.value = place.lat;
+                        longitudeInput.value = place.lon;
+                        suggestionsBox.innerHTML = "";
+                    });
+
+                    suggestionsBox.appendChild(item);
+                });
+            })
+            .catch(function (error) {
+                console.error("Nominatim error:", error);
+            });
+    });
+});
+</script>
         </body>
         </html>';
     }
