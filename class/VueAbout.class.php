@@ -1,0 +1,345 @@
+<?php
+class VueAbout {
+    public function afficher() {
+        global $trad;
+        ?>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title><?= $trad['about_title'] ?? 'About Us - Keys & Boards' ?></title>
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Jost:wght@400;600;700&display=swap" rel="stylesheet">
+            <style>
+                :root {
+                    --bg-topbar: #FFFFFF;
+                    --text-dark: #2F0610;
+                    --accent: #991F3B;
+                    --border-soft: #F4F4F6;
+                    --darkred: 129, 15, 41;
+                    --lightblue: #E7FBFB;
+                    --public-text: #4A5565;
+                }
+
+                body { margin: 0; padding: 0; font-family: "DM Sans", sans-serif; background-color: var(--lightblue); color: #333; }
+
+                /* HEADER APP */
+                .topbar {
+                    height: 64px; padding: 0 40px; display: flex; align-items: center;
+                    justify-content: space-between; background: var(--bg-topbar);
+                    border-bottom: 1px solid var(--border-soft); position: fixed;
+                    top: 0; left: 0; right: 0; z-index: 1000; width: 100%; box-sizing: border-box;
+                }
+
+                /* Ajustement pour le logo SVG */
+                .logo {
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                }
+                .logo svg {
+                    height: 35px;
+                    width: auto;
+                }
+
+                .topbar-right {
+                    display: flex;
+                    align-items: center;
+                    gap: 24px;
+                }
+
+                .circle-btn {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    border: none;
+                    background: transparent;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .signout-btn { border: none; background: transparent; font-size: 13px; font-weight: 500; color: var(--text-dark); cursor: pointer; }
+
+                /* --- MENU DÉROULANT LANGUES --- */
+                .lang-dropdown-container {
+                    position: relative;
+                    display: inline-block;
+                }
+                .lang-menu {
+                    display: none;
+                    position: absolute;
+                    top: 40px;
+                    right: 0;
+                    background-color: #ffffff;
+                    min-width: 130px;
+                    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+                    border-radius: 8px;
+                    z-index: 1001;
+                    overflow: hidden;
+                    border: 1px solid var(--border-soft);
+                }
+                .lang-menu.show {
+                    display: block;
+                }
+                .lang-option {
+                    color: var(--text-dark);
+                    padding: 10px 16px;
+                    text-decoration: none;
+                    display: block;
+                    font-size: 14px;
+                    font-family: 'DM Sans', sans-serif;
+                    transition: background 0.2s;
+                }
+                .lang-option:hover {
+                    background-color: var(--border-soft);
+                    color: var(--accent);
+                }
+
+                /* ABOUT STYLES */
+                .about--header { background-color: rgb(var(--darkred)); color: white; padding: 120px 20px 60px; text-align: center; }
+                .about--header-content { max-width: 900px; margin: 0 auto; }
+                .about--back-link { color: white; text-decoration: none; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 25px; opacity: 0.9; }
+                .about--header h1 { font-family: "Jost", sans-serif; font-size: 36px; margin: 0 0 10px 0; }
+                .about--header p { font-size: 18px; opacity: 0.9; margin: 0; }
+                
+                .about--main { display: flex; justify-content: center; padding: 40px 20px 80px 20px; }
+                .about--container { background-color: white; width: 100%; max-width: 900px; border-radius: 12px; padding: 50px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+                
+                .about--section-title { color: rgb(var(--darkred)); font-size: 24px; font-weight: 700; margin: 35px 0 15px; border-bottom: 1px solid rgba(129,15,41, 0.1); padding-bottom: 10px; }
+                .about--text { font-size: 16px; line-height: 1.7; color: var(--public-text); margin-bottom: 15px; }
+                
+                .about--box { background-color: #F8F9FA; padding: 25px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid rgb(var(--darkred)); }
+                .about--box h3 { margin-top: 0; color: #111; font-size: 18px; margin-bottom: 10px; }
+                
+                .about--list { padding: 0; margin: 0 0 20px 20px; }
+                .about--list li { margin-bottom: 12px; color: var(--public-text); position: relative; list-style: none; }
+                .about--list li::before { content: '•'; color: rgb(var(--darkred)); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+
+                .about--footer-quote { margin-top: 50px; padding-top: 30px; border-top: 1px solid #EAEAEA; text-align: center; font-style: italic; color: #666; }
+
+                /* --- STYLE DU FOOTER EXACT --- */
+                .site--footer { border-top: 1px solid rgba(var(--darkred), 0.15); padding-top: 50px; background-color: white; font-family: "Jost", sans-serif; }
+                .footer--main_content { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 45px !important; padding: 0 115px; }
+                .footer--column { display: flex; flex-direction: column; gap: 15px; }
+                .footer--column h3, .footer--brand { color: rgb(var(--darkred)); font-size: 1.2rem; font-weight: 600; margin: 0; }
+                .footer--column p, .footer--column a { color: #333; text-decoration: none; font-size: 0.95rem; line-height: 1.5; }
+                .footer--column a:hover { color: rgb(var(--darkred)); }
+                
+                .footer--column ul { 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: 12px; 
+                    list-style: none !important; 
+                    padding: 0 !important; 
+                    margin: 0 !important; 
+                }
+                
+                .footer--bottom { border-top: 1px solid rgba(var(--darkred), 0.15); text-align: center; padding: 30px 0; margin: 0 115px; }
+                .footer--bottom p { color: #333; font-size: 0.9rem; margin: 0; }
+            </style>
+        </head>
+        <body>
+            <header class="topbar">
+                <a href="index.php" class="logo">
+                    <svg viewBox="0 0 1292 535" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                        <g>
+                            <g>
+                                <path d="M1143.69,472.972c-10.294,14.52 -31.912,37.655 -75.554,52.932c-51.105,17.889 -150.174,15.677 -171.765,-73.212c-0.443,-1.824 -6.251,-25.05 -3.245,-49.464c6.919,-56.189 53.54,-115.016 88.353,-162.104c-6.129,-20.894 -17.819,-76.625 -17.447,-124.657c0.187,-24.084 2.442,-99.297 63.055,-114.083c21.402,-5.221 35.298,-0.385 38.184,0.619c16.165,5.625 23.689,16.507 24.866,18.06c18,23.751 18.943,60.155 9.149,89.024c-12.708,37.459 -49.486,99.77 -92.854,156.606c4.878,10.999 10.691,22.617 17.279,34.511c3.543,-1.738 7.377,-3.407 11.559,-5.08c13.289,-5.316 21.145,-6.215 24.692,-6.704c72.707,-10.025 113.596,51.681 111.24,93.65c-0.462,8.237 -2.22,40.665 -16.451,70.814c2.204,1.413 4.408,2.764 6.612,4.049c15.481,9.031 42.608,16.595 69.499,4.424c2.046,-0.926 39.058,-15.428 41.478,-52.593c0.612,-9.401 -1.25,-26.567 -12.983,-36.575c-27.908,-23.804 -70.392,1.188 -62.75,29.518c6.801,25.21 55.923,12.901 38.002,-20.054c-0.159,-0.293 -0.431,-0.547 -0.483,-0.877c-0.146,-0.932 0.199,-0.932 0.054,-1.862c0.506,0.365 1.199,0.407 1.705,0.773c0.001,0.001 1.38,2.013 2.568,4.329c17.813,34.733 -39.125,53.452 -50.203,18.993c-9.624,-29.935 25.316,-61.886 62.012,-52.465c19.61,5.034 28.674,18.531 30.318,20.979c18.142,27.015 17.737,75.779 -29.74,106.005c-34.16,21.747 -75.336,15.011 -101.987,-2.131c-1.727,-1.111 -3.448,-2.253 -5.162,-3.424Zm-147.362,-193.262c-29.937,38.136 -74.424,93.35 -74.286,141.066c0.081,27.88 6.975,72.263 64.029,85.819c4.558,1.083 40.546,9.419 79.784,-4.447c29.311,-10.358 48.329,-24.927 60.873,-41.882c-41.024,-33.417 -77.477,-82.525 -104.428,-129.586c-37.238,25.555 -28.123,102.738 8.715,107.935c4.414,0.623 27.625,-0.062 27.55,-15.584c-0.012,-2.567 -0.807,-9.127 -3.999,-13.143c-6.509,-8.191 -24.137,-12.384 -25.585,0.165c-0.239,2.072 0.056,2.3 -1.502,3.699c-0.042,0.038 -3.1,1.109 -3.127,1.097c-3.293,-1.569 -4.241,-1.456 -3.999,-5.1c1.615,-24.326 36.576,-19.787 45.131,-0.582c7.362,16.527 3.357,36.434 -26.402,40.386c-52.568,6.983 -76.593,-76.363 -45.63,-122.585c5.004,-7.47 10.447,-13.153 17.03,-17.936c-5.227,-10.065 -9.962,-19.901 -14.155,-29.321Zm-3.394,-54.332c1.173,-1.65 2.322,-3.282 3.443,-4.894c26.971,-38.79 66.297,-102.479 70.004,-132.679c2.583,-21.044 -1.802,-36.882 -9.829,-44.208c-2.821,-2.575 -5.255,-6.827 -19.115,-5.961c-11.121,0.694 -40.192,5.226 -48.523,77.756c-4.271,37.187 -0.338,75.443 0.332,81.966c1.087,10.569 2.449,20.47 3.687,28.021Zm144.726,216.336c1.378,-2.987 2.62,-6.019 3.744,-9.09c5.486,-14.997 9.597,-44.854 7.347,-58.428c-4.355,-26.266 -33.578,-70.359 -92.574,-55.835c-0.172,0.042 -8.269,1.379 -19.258,5.363c27.222,43.978 63.354,88.78 100.742,117.99Z" style="fill:#2f0610;"/>
+                                <g>
+                                    <circle cx="1216.517" cy="394.381" r="28.796" style="fill:#2f0610;"/>
+                                    <path d="M1216.517,365.015c16.208,0 29.367,13.159 29.367,29.367c0,16.208 -13.159,29.367 -29.367,29.367c-16.208,0 -29.367,-13.159 -29.367,-29.367c0,-16.208 13.159,-29.367 29.367,-29.367Zm0,1.141c-15.578,0 -28.226,12.648 -28.226,28.226c0,15.578 12.648,28.226 28.226,28.226c15.578,0 28.226,-12.648 28.226,-28.226c0,-15.578 -12.648,-28.226 -28.226,-28.226Z" style="fill:#2f0610;"/>
+                                </g>
+                            </g>
+                            <g>
+                                <path d="M351.653,260.986c-20.252,0 -34.773,-13.756 -34.773,-34.391c0,-36.301 51.204,-29.423 51.204,-52.35c0,-8.024 -6.114,-12.992 -14.138,-12.992c-31.334,0 -48.147,31.716 -48.147,59.61c0,30.951 18.342,47.765 48.529,47.765c66.488,0 98.968,-77.57 115.399,-130.684l2.293,-8.024c9.553,-5.35 19.87,-13.756 30.187,-23.691c9.171,2.293 8.024,12.228 8.024,21.016c0,30.187 -21.016,66.106 -21.016,99.35c0,23.691 10.699,42.033 36.683,42.033c30.187,0 48.529,-31.334 60.757,-80.627l-5.732,0c-9.553,38.212 -24.455,67.253 -44.708,67.253c-11.464,0 -16.049,-9.935 -16.049,-25.602c0,-30.951 16.813,-61.139 16.813,-90.944c0,-20.634 -9.935,-32.862 -30.187,-37.065c35.155,-34.008 71.456,-81.773 91.326,-81.773c7.642,0 13.756,4.968 19.87,4.968c6.878,0 12.992,-5.732 12.992,-12.61c0,-9.171 -9.935,-11.464 -17.195,-11.464c-41.651,0 -90.944,89.797 -139.473,120.749c10.317,-40.122 28.659,-112.342 63.049,-116.163l-0.382,-4.968l-7.642,-0.382c-40.886,0 -134.887,18.342 -134.887,72.602c0,12.992 5.732,22.927 19.488,22.927c10.699,0 17.577,-7.26 18.724,-17.577c-1.528,0.382 -3.057,0.764 -4.585,0.764c-8.789,0 -11.846,-7.642 -11.846,-15.285c0,-40.504 72.22,-56.553 103.172,-56.553c-20.252,11.081 -37.447,22.163 -50.439,41.651c-19.87,29.805 -31.334,76.805 -41.651,111.196c-9.553,33.626 -30.951,101.261 -75.659,101.261Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M670.72,116.163c6.114,0 7.642,6.496 5.35,18.342c-4.203,22.545 -18.342,38.212 -33.626,38.212l-9.553,0c8.407,-28.277 25.602,-56.553 37.83,-56.553Zm24.455,68.399l-4.585,0c-11.464,25.602 -27.512,40.504 -44.326,40.504c-14.903,0 -18.724,-8.789 -18.724,-21.781c0,-7.642 1.528,-16.813 4.203,-25.984c24.073,-0.382 66.87,3.057 73.366,-30.951c4.203,-21.399 -10.317,-36.301 -35.537,-36.301c-37.447,0 -74.131,39.74 -74.131,82.155c0,26.748 14.52,40.886 43.179,40.886c23.309,0 46.236,-19.488 56.553,-48.529Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M697.086,275.506c10.699,-5.35 15.285,-10.699 15.285,-17.959c0,-7.26 -5.35,-11.846 -13.756,-11.846c-12.61,0 -22.927,9.553 -22.927,21.016c0,9.171 6.496,15.285 15.285,15.285c16.049,0 40.122,-19.106 63.049,-46.236c34.773,-40.886 75.277,-89.033 75.277,-110.814c0,-9.171 -6.496,-14.903 -16.813,-14.903c-12.992,0 -24.838,9.171 -24.838,22.545c0,8.024 4.968,14.52 13.374,14.52c12.228,0 19.87,-12.61 23.309,-22.545c0.382,11.081 -23.691,46.236 -51.204,79.862l-5.732,-90.562l-55.025,0l0,3.821c12.61,1.528 22.545,3.439 23.309,18.342l7.26,103.936c-12.992,14.903 -29.423,31.334 -45.854,35.537Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M844.201,148.261c-0.382,18.342 12.992,27.13 28.277,36.301c12.992,7.26 25.984,14.903 26.748,25.984c1.146,11.081 -10.699,18.342 -30.187,18.342c-25.602,0 -34.391,-14.903 -36.301,-22.545c3.439,4.968 8.407,8.407 14.903,8.407c9.171,0 15.285,-6.878 15.285,-16.049c0,-8.407 -4.968,-15.667 -15.285,-15.667c-12.992,0 -20.634,10.699 -19.488,22.163c1.911,16.813 21.781,28.277 42.797,28.277c29.805,0 52.732,-17.959 51.968,-40.886c-0.382,-13.374 -8.789,-24.455 -32.098,-37.447c-14.138,-7.642 -24.838,-12.992 -25.22,-22.545c-0.382,-8.407 8.407,-18.342 32.098,-18.342c24.838,0 31.334,10.699 33.244,17.959c-3.439,-4.968 -8.789,-8.024 -15.285,-8.024c-8.789,0 -14.903,6.496 -14.903,16.049c0,8.407 4.585,15.285 15.285,15.285c12.61,0 20.252,-10.699 19.106,-22.163c-1.146,-14.52 -16.431,-23.309 -37.83,-23.309c-24.073,0 -52.35,10.317 -53.114,38.212Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                            </g>
+                            <g>
+                                <path d="M118.51,528.902l-4.192,0l-0.381,5.732c63.254,2.675 128.793,-31.334 128.793,-97.058c0,-30.951 -14.48,-47 -49.536,-55.025c39.248,-6.496 65.159,-34.008 65.159,-65.342c0,-30.951 -24.768,-47.765 -69.35,-47.765c-62.11,0 -112.409,32.862 -112.409,75.659c0,16.049 7.24,25.602 19.433,25.602c9.907,0 17.147,-6.114 18.29,-17.195c-11.431,2.293 -17.147,-6.496 -17.147,-19.87c-0.381,-44.708 60.586,-57.7 96.024,-56.553c-49.917,16.431 -67.064,85.212 -83.449,146.351c-14.861,54.261 -29.341,102.789 -67.064,102.789c-17.147,0 -29.722,-10.317 -31.627,-27.512c-2.286,-26.366 22.863,-35.919 42.296,-44.326c6.478,-2.675 9.907,-9.553 8.383,-16.813c-1.143,-6.114 -6.097,-9.553 -13.718,-9.935c-24.006,-0.382 -48.393,25.984 -48.012,60.374c0,27.895 16.385,45.854 44.582,45.854c51.441,0 78.876,-53.114 97.929,-110.05c14.099,-42.033 23.625,-85.976 35.818,-113.107c4.954,-10.699 10.669,-21.016 22.101,-32.098c18.671,3.439 28.197,12.992 28.197,32.48c0,41.269 -19.814,61.903 -61.729,69.927l0,4.968c32.008,0.382 41.534,10.699 41.534,42.033c0,62.285 -36.961,102.789 -89.927,100.879Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M336.468,376.819c-35.818,0 -73.923,39.74 -73.923,82.537c0,26.366 14.48,40.504 42.296,40.504c36.961,0 73.161,-39.358 73.161,-81.391c0,-27.13 -14.861,-41.651 -41.534,-41.651Zm-32.389,117.31c-6.478,0 -9.145,-6.114 -9.145,-19.106c0,-39.358 24.006,-92.09 41.915,-92.09c6.097,0 8.764,5.732 8.764,19.87c0,40.504 -22.863,91.326 -41.534,91.326Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M468.691,384.079c6.097,0 10.288,4.203 10.288,12.228c0,19.106 -29.722,92.472 -51.06,92.472c-6.859,0 -9.526,-4.968 -9.526,-16.431c0,-36.683 28.578,-88.269 50.298,-88.269Zm6.859,115.781c9.526,0 18.671,-3.821 28.959,-11.081l-1.524,-2.293c-1.905,1.146 -6.478,3.439 -9.526,3.439c-5.716,0 -7.621,-5.732 -4.192,-15.285l30.865,-94.383l-32.77,0l-3.429,9.935c-2.286,-8.407 -9.907,-13.756 -20.576,-13.756c-44.201,0 -77.352,51.204 -77.352,89.797c0,19.106 8.002,33.626 28.578,33.626c19.814,0 33.913,-17.577 42.677,-33.244c-5.716,15.667 -1.905,33.244 18.29,33.244Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M544.138,420.762l-26.292,75.277l57.919,0l0,-3.821c-7.24,-1.146 -17.147,-3.821 -17.147,-12.992c0,-4.968 12.193,-40.122 22.101,-67.635c6.097,-9.553 24.387,-31.716 38.486,-28.659c-9.526,3.439 -19.814,12.61 -19.814,23.691c0,7.26 5.335,11.464 13.718,11.464c14.48,0 28.959,-12.61 28.959,-25.602c0,-11.081 -9.526,-16.049 -19.433,-16.049c-12.956,0 -25.911,7.642 -36.961,21.781l6.097,-17.959l-57.919,0l0,3.821c7.24,1.146 16.385,2.675 16.385,12.228c0,7.642 -3.429,17.195 -6.097,24.455Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M717.514,384.079c6.097,0 10.288,4.203 10.288,12.228c0,19.106 -28.197,92.472 -49.536,92.472c-6.859,0 -9.526,-4.968 -9.526,-16.431c0,-36.683 27.435,-88.269 48.774,-88.269Zm24.387,-20.252l-9.145,26.366c-2.286,-8.407 -9.907,-13.756 -20.576,-13.756c-44.201,0 -75.828,51.204 -75.828,89.415c0,19.488 8.002,34.008 28.578,34.008c19.814,0 33.913,-17.577 42.677,-33.244c-5.716,15.667 -1.905,33.244 18.671,33.244c9.145,0 18.29,-3.821 28.578,-11.081l-1.524,-2.293c-1.905,1.146 -6.478,3.439 -9.526,3.439c-5.716,0 -7.24,-5.732 -4.192,-15.285l49.917,-151.7l-57.919,0l0,3.821c20.576,3.439 19.433,9.553 10.288,37.065Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                                <path d="M786.864,414.649c-0.381,18.342 12.956,27.13 28.197,36.301c12.956,7.26 25.911,14.903 26.673,25.984c1.143,11.081 -10.669,18.342 -30.103,18.342c-25.53,0 -34.294,-14.903 -36.199,-22.545c3.429,4.968 8.383,8.407 14.861,8.407c9.145,0 15.242,-6.878 15.242,-16.049c0,-8.407 -4.954,-15.667 -15.242,-15.667c-12.956,0 -20.576,10.699 -19.433,22.163c1.905,16.813 21.72,28.277 42.677,28.277c29.722,0 52.584,-17.959 51.822,-40.886c-0.381,-13.374 -8.764,-24.455 -32.008,-37.447c-14.099,-7.642 -24.768,-12.992 -25.149,-22.545c-0.381,-8.407 8.383,-18.342 32.008,-18.342c24.768,0 31.246,10.699 33.151,17.959c-3.429,-4.968 -8.764,-8.024 -15.242,-8.024c-8.764,0 -14.861,6.496 -14.861,16.049c0,8.407 4.573,15.285 15.242,15.285c12.575,0 20.195,-10.699 19.052,-22.163c-1.143,-14.52 -16.385,-23.309 -37.724,-23.309c-24.006,0 -52.203,10.317 -52.965,38.212Z" style="fill:#2f0610;fill-rule:nonzero;"/>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                <div class="topbar-right">
+                    <div class="topbar-icons">
+                        <div class="lang-dropdown-container">
+                            <button class="circle-btn" id="langToggleBtn" title="Changer de langue" style="font-size: 18px;">
+                                🌍
+                            </button>
+                            <div class="lang-menu" id="langMenu">
+                                <a href="?action=about&lang=en" class="lang-option">🇬🇧 English</a>
+                                <a href="?action=about&lang=fr" class="lang-option">🇫🇷 Français</a>
+                                <a href="?action=about&lang=sq" class="lang-option">🇦🇱 Shqip</a>
+                                <a href="?action=about&lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="signout-btn" onclick="window.location.href='index.php'"><?= $trad['side_home'] ?? 'Home' ?></button>
+                </div>
+            </header>
+
+            <header class="about--header">
+                <div class="about--header-content">
+                    <a href="index.php" class="about--back-link">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <?= $trad['side_home'] ?? 'Back to Home' ?>
+                    </a>
+                    <h1><?= $trad['about_header_h1'] ?? 'About Us' ?></h1>
+                    <p><?= $trad['about_header_p'] ?? 'Connecting Generations Through Music' ?></p>
+                </div>
+            </header>
+
+            <main class="about--main">
+                <div class="about--container">
+                    <section>
+                        <h2 class="about--section-title"><?= $trad['about_welcome_title'] ?? 'Welcome to Keys & Boards' ?></h2>
+                        <p class="about--text"><?= $trad['about_welcome_p1'] ?? 'Keys & Boards is an intergenerational web platform designed to connect music lovers from Gen Z to Seniors. Our mission is to create a vibrant community where people can share musical skills, life experiences, and audio stories across age boundaries.' ?></p>
+                        <p class="about--text"><?= $trad['about_welcome_p2'] ?? 'Whether you\'re a vinyl collector, a digital music producer, a jazz enthusiast, or simply someone who loves to share stories about music, Keys & Boards provides the space for meaningful connections.' ?></p>
+                    </section>
+
+                    <section>
+                        <h2 class="about--section-title"><?= $trad['about_mission_title'] ?? 'Our Mission' ?></h2>
+                        <p class="about--text"><?= $trad['about_mission_text'] ?? 'To bridge generational gaps through the universal language of music, fostering knowledge exchange, cultural appreciation, and lasting friendships between people of all ages.' ?></p>
+                    </section>
+
+                    <section>
+                        <h2 class="about--section-title"><?= $trad['about_values_title'] ?? 'Core Values' ?></h2>
+                        <div class="about--box">
+                            <h3><?= $trad['about_val_incl_title'] ?? 'Inclusivity' ?></h3>
+                            <p><?= $trad['about_val_incl_text'] ?? 'We welcome music lovers of all ages, backgrounds, and skill levels. Everyone has something valuable to share and learn.' ?></p>
+                        </div>
+                        <div class="about--box">
+                            <h3><?= $trad['about_val_acc_title'] ?? 'Accessibility' ?></h3>
+                            <p><?= $trad['about_val_acc_text'] ?? 'Our platform is designed with high contrast, readable fonts, intuitive navigation, and multilingual support to ensure everyone can participate comfortably.' ?></p>
+                        </div>
+                        <div class="about--box">
+                            <h3><?= $trad['about_val_saf_title'] ?? 'Respect & Safety' ?></h3>
+                            <p><?= $trad['about_val_saf_text'] ?? 'We maintain a safe, respectful environment where all members can share their passion for music without fear of harassment or discrimination.' ?></p>
+                        </div>
+                        <div class="about--box">
+                            <h3><?= $trad['about_val_know_title'] ?? 'Knowledge Sharing' ?></h3>
+                            <p><?= $trad['about_val_know_text'] ?? 'From vinyl restoration techniques to modern music production, we facilitate the exchange of skills and experiences across generations.' ?></p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="about--section-title"><?= $trad['about_offer_title'] ?? 'What We Offer' ?></h2>
+                        <ul class="about--list">
+                            <li><?= $trad['about_offer_li1'] ?? 'Community boards organized by music genres and topics' ?></li>
+                            <li><?= $trad['about_offer_li2'] ?? 'Direct messaging for one-on-one conversations' ?></li>
+                            <li><?= $trad['about_offer_li3'] ?? 'Calendar for scheduling music sessions and meetups' ?></li>
+                            <li><?= $trad['about_offer_li4'] ?? 'Map-based exploration to find local music enthusiasts' ?></li>
+                            <li><?= $trad['about_offer_li5'] ?? 'Audio and video sharing capabilities' ?></li>
+                            <li><?= $trad['about_offer_li6'] ?? 'Hashtag system for easy content discovery' ?></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="about--section-title"><?= $trad['about_acad_title'] ?? 'Academic Background' ?></h2>
+                        <p class="about--text"><?= $trad['about_acad_text1'] ?? 'Keys & Boards was developed as part of the International Open Bidding Project, a collaborative academic initiative involving multiple international institutions.' ?></p>
+                        <div class="about--box">
+                            <h3><?= $trad['about_acad_partners_title'] ?? 'Partner Institutions' ?></h3>
+                            <p><?= $trad['about_acad_partners_text'] ?? 'IUT de Bobigny, Université Sorbonne Paris-Nord (France)<br>University of Tirana (Albania)<br>Hanoi University of Science, VNU (Vietnam)' ?></p>
+                        </div>
+                        <p class="about--text"><?= $trad['about_acad_text2'] ?? 'This project represents a commitment to creating technology that serves social good and promotes intergenerational understanding through shared cultural experiences.' ?></p>
+                    </section>
+
+                    <section>
+                        <h2 class="about--section-title"><?= $trad['about_contact_title'] ?? 'Get in Touch' ?></h2>
+                        <p class="about--text"><?= $trad['about_contact_text'] ?? 'We\'d love to hear from you! Whether you have questions, suggestions, or just want to share your experience with Keys & Boards, feel free to reach out.' ?></p>
+                        <div class="about--box">
+                            <p><strong><?= $trad['about_contact_email'] ?? 'Email:' ?></strong> <a href="mailto:azad.oztopal.pro@gmail.com" style="color: inherit; text-decoration: none;">azad.oztopal.pro@gmail.com</a></p>
+                            <p><strong><?= $trad['about_contact_phone'] ?? 'Phone:' ?></strong> 07 67 24 28 21</p>
+                            <p><strong><?= $trad['about_contact_address'] ?? 'Address:' ?></strong> 1 Rue de Chablis, 93000 Bobigny, France</p>
+                        </div>
+                    </section>
+
+                    <div class="about--footer-quote">
+                        <p><?= $trad['about_footer_quote'] ?? 'Join us in building bridges through music' ?></p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="site--footer">
+                <div class="footer--main_content">
+                    <div class="footer--column">
+                        <h3 class="footer--brand"><a href="index.php" style="text-decoration: none; color: inherit;">Keys & Boards</a></h3>
+                        <p><?= $trad['footer_slogan'] ?? 'Share music across generations' ?></p>
+                    </div>
+
+                    <div class="footer--column">
+                        <h3><?= $trad['footer_link_about'] ?? 'About us' ?></h3>
+                        <ul>
+                            <li><a href="index.php?action=about"><?= $trad['footer_link_about'] ?? 'About us' ?></a></li>
+                            <li><a href="index.php?action=faq"><?= $trad['footer_link_questions'] ?? 'Questions' ?></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer--column footer--column-legal">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="index.php?action=legal"><?= $trad['footer_link_legal_info'] ?? 'Legal information' ?></a></li>
+                            <li><a href="index.php?action=terms"><?= $trad['footer_link_tos'] ?? 'User agreement and terms of service' ?></a></li>
+                            <li><a href="index.php?action=privacy"><?= $trad['footer_link_privacy'] ?? 'Privacy policy' ?></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer--column">
+                        <h3>Popular Boards</h3>
+                        <ul>
+                            <li><a href="#"><?= $trad['board_jazz_name'] ?? '#Jazz' ?></a></li>
+                            <li><a href="#"><?= $trad['board_mao_name'] ?? '#MAO' ?></a></li>
+                            <li><a href="#"><?= $trad['board_vinyl_name'] ?? '#Vinyl' ?></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer--column">
+                        <h3>Connect</h3>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Facebook</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer--bottom">
+                    <p><?= $trad['footer_copyright'] ?? '© 2026 Keys & Boards. All rights reserved.' ?></p>
+                </div>
+            </footer>
+
+            <script>
+                // --- GESTION DU MENU DES LANGUES ---
+                document.addEventListener('DOMContentLoaded', function() {
+                    const langToggleBtn = document.getElementById('langToggleBtn');
+                    const langMenu = document.getElementById('langMenu');
+
+                    if (langToggleBtn && langMenu) {
+                        langToggleBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            langMenu.classList.toggle('show');
+                            event.stopPropagation();
+                        });
+
+                        document.addEventListener('click', function(event) {
+                            if (!langToggleBtn.contains(event.target) && !langMenu.contains(event.target)) {
+                                langMenu.classList.remove('show');
+                            }
+                        });
+                    }
+                });
+            </script>
+        </body>
+        </html>
+        <?php
+    }
+}
