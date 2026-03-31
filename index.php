@@ -30,6 +30,7 @@ switch ($action) {
 
     case 'profil':
         // Si tu as créé une VueProfil.class.php
+        echo "DEBUG user_id: " . ($_SESSION['user_id'] ?? 'NOT SET');
         $vue = new VueProfil();
         $vue->setActionActive('profil');
         $vue->afficher();
