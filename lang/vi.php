@@ -29,6 +29,10 @@ return [
     'board_electro' => 'Electro',
 
     // -- FOOTER --
+
+    'footer_title_legal' => 'Pháp lý',
+    'footer_title_boards' => 'Bảng Phổ biến',
+    'footer_title_connect' => 'Kết nối',
     'footer_slogan' => 'Chia sẻ âm nhạc qua các thế hệ.',
     'footer_link_about' => 'Về chúng tôi',
     'footer_link_questions' => 'Câu hỏi',
@@ -395,6 +399,22 @@ return [
     'faq_contact_title' => 'Vẫn còn câu hỏi?',
     'faq_contact_text' => 'Nếu bạn không tìm thấy câu trả lời mà bạn đang tìm kiếm, xin đừng ngần ngại liên hệ với chúng tôi.',
     'faq_contact_us' => 'Liên hệ với chúng tôi:',
+
+
+
+    //about us
+
+    'team_dept_dev' => 'Nhóm Phát triển',
+    'team_dept_strategy' => 'Chiến lược & Thiết kế UX/UI',
+    'team_dept_media' => 'Đồ họa & Truyền thông',
+    
+    'role_fullstack' => 'Nhà phát triển Full-Stack',
+    'role_backend' => 'Nhà phát triển Back-End',
+    'role_frontend' => 'Nhà phát triển Front-End',
+    'role_ui_ux_legal' => 'UI/UX, Chiến lược & Pháp lý',
+    'role_comm' => 'Chiến lược Truyền thông',
+    'role_graphic_video' => 'Thiết kế Đồ họa & Video',
+    'role_graphic' => 'Thiết kế Đồ họa',
 
 
 ];

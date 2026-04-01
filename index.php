@@ -58,10 +58,124 @@ case 'feed':
         break;
 
 
-        case 'profile':
-            $vue = new VueProfil();
+    case 'profile':
+        $vue = new VueProfil();
+        $vue->afficher();
+        break;
+
+        case 'updateProfile':
+            if (isset($_SESSION['user_id'])) {
+                $pdo = Database::getLink();
+                $uid = $_SESSION['user_id']; // C'est ton "verrou" personnel
+        
+                // ⚠️ ATTENTION : Si tu oublies le WHERE, ça change TOUTE la table !
+                $sql = "UPDATE users SET 
+                        display_name = :name, 
+                        bio = :bio, 
+                        city = :city 
+                        WHERE id = :id"; // <--- C'EST CETTE LIGNE LA PLUS IMPORTANTE
+                
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':name' => $_POST['display_name'],
+                    ':bio'  => $_POST['bio'],
+                    ':city' => $_POST['city'],
+                    ':id'   => $uid // On ne modifie QUE l'ID de la session
+                ]);
+        
+                // GESTION DE L'AVATAR
+                if (!empty($_FILES['profile_pic']['name'])) {
+                    $ext = pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION);
+                    $path = "img/profiles/avatar_" . $uid . "." . $ext;
+                    
+                    if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $path)) {
+                        // SI LE FICHIER EST BIEN DEPLACÉ, ON UPDATE LA BDD
+                        $pdo->prepare("UPDATE users SET profile_pic = :p WHERE id = :id")
+                            ->execute([':p' => $path, ':id' => $uid]);
+                    }
+                }
+        
+                // GESTION DE LA BANNIÈRE
+                if (!empty($_FILES['banner_pic']['name'])) {
+                    $ext = pathinfo($_FILES['banner_pic']['name'], PATHINFO_EXTENSION);
+                    $path = "img/banners/banner_" . $uid . "." . $ext;
+                    
+                    if (move_uploaded_file($_FILES['banner_pic']['tmp_name'], $path)) {
+                        $pdo->prepare("UPDATE users SET banner_pic = :p WHERE id = :id")
+                            ->execute([':p' => $path, ':id' => $uid]);
+                    }
+                }
+            }
+            header("Location: index.php?action=profile");
+            exit();
+    
+    case 'notif':
+        $vue = new VueNotif();
+        $vue->afficher();
+        break;
+
+        case 'follow':
+            $tab = $_GET['tab'] ?? 'all';
+            $vue = new VueFollow([], $tab);
             $vue->afficher();
             break;
+
+// --- ACTIONS AGENDA ---
+
+case 'saveEvent':
+    // C'est ici qu'on traite le formulaire (AJOUT ou UPDATE)
+    if (isset($_SESSION['user_id'])) {
+        $pdo = Database::getLink();
+        
+        // On concatène la date et l'heure pour le format BDD
+        $start_date = $_POST['date'] . ' ' . $_POST['start_time'];
+        $end_date = $_POST['date'] . ' ' . $_POST['end_time'];
+        
+        if (!empty($_POST['id'])) {
+            // UPDATE (si l'id existe, on modifie)
+            $sql = "UPDATE events SET title = :t, description = :d, start_date = :s, end_date = :e, visibility = :v 
+                    WHERE id = :id AND creator_id = :uid";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':t'   => $_POST['title'],
+                ':d'   => $_POST['description'],
+                ':s'   => $start_date,
+                ':e'   => $end_date,
+                ':v'   => $_POST['visibility'],
+                ':id'  => $_POST['id'],
+                ':uid' => $_SESSION['user_id']
+            ]);
+        } else {
+            // INSERT (si pas d'id, c'est un nouveau)
+            $sql = "INSERT INTO events (creator_id, title, description, start_date, end_date, visibility) 
+                    VALUES (:uid, :t, :d, :s, :e, :v)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':uid' => $_SESSION['user_id'],
+                ':t'   => $_POST['title'],
+                ':d'   => $_POST['description'],
+                ':s'   => $start_date,
+                ':e'   => $end_date,
+                ':v'   => $_POST['visibility']
+            ]);
+        }
+    }
+    header("Location: index.php?action=agenda");
+    exit();
+
+case 'deleteEvent':
+    // Suppression d'un événement
+    if (isset($_GET['id']) && isset($_SESSION['user_id'])) {
+        $pdo = Database::getLink();
+        $sql = "DELETE FROM events WHERE id = :id AND creator_id = :uid";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':id'  => $_GET['id'],
+            ':uid' => $_SESSION['user_id']
+        ]);
+    }
+    header("Location: index.php?action=agenda");
+    exit();
 
     case 'inscription':
         $error = isset($_GET['error']) ? $_GET['error'] : null;

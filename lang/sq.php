@@ -29,6 +29,10 @@ return [
     'board_electro' => 'Elektro',
 
     // -- FOOTER --
+
+    'footer_title_legal' => 'Ligjore',
+    'footer_title_boards' => 'Bordet Popullore',
+    'footer_title_connect' => 'Rrjetet',
     'footer_slogan' => 'Ndajmë muzikën mes brezave.',
     'footer_link_about' => 'Rreth nesh',
     'footer_link_questions' => 'Pyetje',
@@ -340,5 +344,22 @@ return [
     'about_contact_address' => 'Adresa:',
     
     'about_footer_quote' => 'Bashkohuni me ne në ndërtimin e urave përmes muzikës',
+
+
+
+
+    //team about us
+
+    'team_dept_dev' => 'Ekipi i Zhvillimit',
+    'team_dept_strategy' => 'Strategjia & Dizajni UX/UI',
+    'team_dept_media' => 'Grafika & Media',
+    
+    'role_fullstack' => 'Zhvillues/e Full-Stack',
+    'role_backend' => 'Zhvillues/e Back-End',
+    'role_frontend' => 'Zhvillues/e Front-End',
+    'role_ui_ux_legal' => 'UI/UX, Strategji & Ligjore',
+    'role_comm' => 'Strategjia e Komunikimit',
+    'role_graphic_video' => 'Dizajner/e Grafik & Video',
+    'role_graphic' => 'Dizajner/e Grafik',
 
 ];

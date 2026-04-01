@@ -932,3 +932,44 @@ align-self: center;
     color: #666;
     font-size: 15px;
 }
+
+.card {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pour que le bouton soit toujours en bas */
+    align-items: center;
+    border: 1px solid rgba(var(--darkred), 0.15);
+    border-radius: 12px;
+    margin: 10px;
+    
+    /* ✅ FIXER LA LARGEUR ICI */
+    width: 300px; 
+    min-height: 450px; /* Optionnel : pour qu'elles aient aussi la même hauteur */
+    
+    background-color: white; /* Pour éviter la transparence */
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+
+/* On s'assure que la description ne casse pas tout */
+.card--desc {
+    width: 90%; /* Plus large que les 65% actuels */
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    height: 60px; /* Fixer une hauteur pour la bio évite les décalages */
+    overflow: hidden; /* Coupe le texte si c'est trop long */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limite à 3 lignes */
+    -webkit-box-orient: vertical;
+}
+
+#view-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: flex-start; /* Aligne au début (gauche) */
+    padding-left: 0; /* Force le retrait de la marge interne gauche */
+    margin-left: -10px; /* Astuce pour compenser le margin des cartes */
+    width: 100%;
+}

@@ -2,14 +2,23 @@
 class VueAgenda extends VueBase {
 
     public function __construct() {
-        // Titre de l'onglet
         parent::__construct("LinkUp – My Agenda");
-        // On active l'onglet agenda dans la sidebar
         $this->actionActive = 'agenda';
+    }
+
+    private function getEvents() {
+        $pdo = Database::getLink();
+        // On récupère tous les événements triés par date
+        $sql = "SELECT * FROM events ORDER BY start_date ASC";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function afficher() {
         global $trad;
+        $events = $this->getEvents();
+        $eventsJson = json_encode($events);
 
         ob_start(); 
         ?>
@@ -43,26 +52,83 @@ class VueAgenda extends VueBase {
                 </div>
 
                 <div class="section-title" style="padding: 30px 40px 10px 40px; font-weight: 700;">Upcoming Events</div>
+                
                 <div id="eventsList" style="padding: 0 40px 40px 40px;">
-                    </div>
-
+                    <?php if (empty($events)): ?>
+                        <p style="color: #666;">No upcoming events.</p>
+                    <?php else: ?>
+                        <?php foreach ($events as $event): ?>
+                            <div class="event-item" style="background: white; padding: 15px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="openModal(<?= $event['id'] ?>)">
+                                <div>
+                                    <strong style="display: block;"><?= htmlspecialchars($event['title']) ?></strong>
+                                    <small style="color: #888;"><?= date('d M Y, H:i', strtotime($event['start_date'])) ?></small>
+                                </div>
+                                <span class="legend-dot dot-<?= $event['visibility'] ?? 'public' ?>"></span>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 
         <div class="modal-overlay" id="modalOverlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center;">
             <div class="modal" style="background: white; padding: 30px; border-radius: 16px; width: 90%; max-width: 500px;">
-                <h3>New Event</h3>
-                <div class="form-group" style="margin-top: 15px;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600;">Event Name</label>
-                    <input type="text" id="inp-name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;" />
-                </div>
-                <div class="modal-actions" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-                    <button class="btn-cancel" onclick="closeModal()" style="padding: 8px 16px; border: 1px solid #ddd; background: none; border-radius: 8px; cursor: pointer;">Cancel</button>
-                    <button class="btn-save" onclick="saveEvent()" style="padding: 8px 16px; background: #810F29; color: white; border: none; border-radius: 8px; cursor: pointer;">Save Event</button>
-                </div>
+                <h3 id="modalTitle">New Event</h3>
+                
+                <form id="eventForm" action="index.php?action=saveEvent" method="POST">
+                    <input type="hidden" name="id" id="inp-id">
+                    
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label style="display: block; font-size: 0.8rem; font-weight: 600;">Event Name</label>
+                        <input type="text" name="title" id="inp-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;" />
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label style="display: block; font-size: 0.8rem; font-weight: 600;">Description</label>
+                        <textarea name="description" id="inp-desc" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <div style="flex: 1;">
+                            <label style="display: block; font-size: 0.8rem; font-weight: 600;">Date</label>
+                            <input type="date" name="date" id="inp-date" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;" />
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="display: block; font-size: 0.8rem; font-weight: 600;">Visibility</label>
+                            <select name="visibility" id="inp-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="public">Public</option>
+                                <option value="shared">Shared</option>
+                                <option value="private">Private</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <div style="flex: 1;">
+                            <label style="display: block; font-size: 0.8rem; font-weight: 600;">Start Time</label>
+                            <input type="time" name="start_time" id="inp-start" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;" />
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="display: block; font-size: 0.8rem; font-weight: 600;">End Time</label>
+                            <input type="time" name="end_time" id="inp-end" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;" />
+                        </div>
+                    </div>
+
+                    <div class="modal-actions" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                        <button type="button" id="btn-delete" onclick="deleteEvent()" style="display:none; padding: 8px 16px; background: #ff4d4d; color: white; border: none; border-radius: 8px; cursor: pointer; margin-right: auto;">Delete</button>
+                        
+                        <button type="button" class="btn-cancel" onclick="closeModal()" style="padding: 8px 16px; border: 1px solid #ddd; background: none; border-radius: 8px; cursor: pointer;">Cancel</button>
+                        <button type="submit" class="btn-save" style="padding: 8px 16px; background: #810F29; color: white; border: none; border-radius: 8px; cursor: pointer;">Save Event</button>
+                    </div>
+                </form>
             </div>
         </div>
 
+        <script>
+            // Le pont entre PHP et JS
+            window.dbEvents = <?php echo $eventsJson; ?>;
+            console.log("Données reçues de la BDD :", window.dbEvents);
+        </script>
         <script src="js/agenda.js"></script>
 
         <?php

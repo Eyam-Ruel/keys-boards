@@ -340,18 +340,22 @@ class VueAuth {
                 </a>
                 <div class="topbar-right">
                     <div class="topbar-icons">
-                        <div class="lang-dropdown-container">
-                            <button class="circle-btn" id="langToggleBtn" title="Changer de langue" style="font-size: 18px;">🌍</button>
-                            <div class="lang-menu" id="langMenu">
-                                <a href="?action=' . $current_action . '&lang=en" class="lang-option">🇬🇧 English</a>
-                                <a href="?action=' . $current_action . '&lang=fr" class="lang-option">🇫🇷 Français</a>
-                                <a href="?action=' . $current_action . '&lang=sq" class="lang-option">🇦🇱 Shqip</a>
-                                <a href="?action=' . $current_action . '&lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="signout-btn" onclick="window.location.href=\'index.php\'">' . ($trad['side_home'] ?? 'Home') . '</button>
-                </div>
+    <button class="circle-btn" id="themeToggleBtn" title="Changer de mode">
+        <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img" id="themeIcon">
+    </button>
+    
+    <div class="lang-dropdown-container">
+        <button class="circle-btn" id="langToggleBtn" title="Changer de langue">
+            <img src="img/icons/Language.png" alt="Language" class="topbar-icon-img">
+        </button>
+        <div class="lang-menu" id="langMenu">
+            <a href="?action=' . $current_action . '&lang=en" class="lang-option">🇬🇧 English</a>
+            <a href="?action=' . $current_action . '&lang=fr" class="lang-option">🇫🇷 Français</a>
+            <a href="?action=' . $current_action . '&lang=sq" class="lang-option">🇦🇱 Shqip</a>
+            <a href="?action=' . $current_action . '&lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
+        </div>
+    </div>
+</div>
             </header>';
     }
 

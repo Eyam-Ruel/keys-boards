@@ -5,205 +5,105 @@ class VueFeed extends VueBase {
         $this->actionActive = 'feed';
     }
 
+    private function getPosts($filter = 'all') {
+        $pdo = Database::getLink();
+        $myId = $_SESSION['user_id'] ?? 0;
+    
+        if ($filter === 'following' && $myId > 0) {
+            $sql = "SELECT p.*, u.display_name, u.pseudo, u.profile_pic, pm.media_path 
+                    FROM posts p
+                    JOIN users u ON p.user_id = u.id
+                    JOIN follows f ON p.user_id = f.followed_id
+                    LEFT JOIN post_media pm ON p.id = pm.post_id
+                    WHERE f.follower_id = :myId
+                    ORDER BY p.created_at DESC";
+            $params = [':myId' => $myId];
+        } else {
+            $sql = "SELECT p.*, u.display_name, u.pseudo, u.profile_pic, pm.media_path 
+                    FROM posts p
+                    JOIN users u ON p.user_id = u.id
+                    LEFT JOIN post_media pm ON p.id = pm.post_id
+                    ORDER BY p.created_at DESC";
+            $params = [];
+        }
+    
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
     public function afficher() {
         global $trad; 
+        $currentView = $_GET['view'] ?? 'all';
+        $posts = $this->getPosts($currentView);
 
         ob_start(); 
         ?>
         
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/feed.css"> <div class="explore--content">
-
+        <link rel="stylesheet" href="css/feed.css"> 
+        
+        <div class="explore--content">
             <div class="feed">
                 <div class="feed--nav">
-                    <input type="button" value="For you" class="feed--nav--button">
-                    <input type="button" value="Following" class="feed--nav--button">
+                    <input type="button" value="For you" id="btn-all" 
+                           class="feed--nav--button <?= ($currentView === 'all') ? 'active-tab' : '' ?>" 
+                           onclick="switchFeed('all')">
+                           
+                    <input type="button" value="Following" id="id-btn-following" 
+                           class="feed--nav--button <?= ($currentView === 'following') ? 'active-tab' : '' ?>" 
+                           onclick="switchFeed('following')">
                 </div>
                 
-                <div class="posts--container">
-                    <div class="post">
-                        <div class="post--content">
-                            <div class="post--header">
-                                <img src="img/ppWoman.png" alt="pp" class="post--header--img" />
-                                <div class="post--header--text">
-                                    <span class="card--username Inter">Sophie Martin</span>
-                                    <span class="card--userID">@sophiemartin 2h ago</span>
-                                    <div class="post--text Inter">
-                                        Hosting a live jazz piano session tonight at 8 PM! Everyone welcome 🎹
+                <div class="posts--container" id="posts-container">
+                    <?php if (empty($posts)): ?>
+                        <p style="text-align:center; padding:50px; color:#666;">No posts yet in this category. 🎸</p>
+                    <?php else: ?>
+                        <?php foreach ($posts as $post): ?>
+                            <div class="post">
+                                <div class="post--content">
+                                    <div class="post--header">
+                                        <img src="<?= !empty($post['profile_pic']) ? $post['profile_pic'] : 'img/ppMan.png' ?>" alt="pp" class="post--header--img" />
+                                        <div class="post--header--text">
+                                            <span class="card--username Inter"><?= htmlspecialchars($post['display_name']) ?></span>
+                                            <span class="card--userID">@<?= htmlspecialchars($post['pseudo']) ?> • <?= date('H:i', strtotime($post['created_at'])) ?></span>
+                                            <div class="post--text Inter">
+                                                <?= nl2br(htmlspecialchars($post['content'])) ?>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
+                                    <?php if (!empty($post['media_path'])): ?>
+                                    <div class="post--media">
+                                        <img src="<?= $post['media_path'] ?>" alt="postImg" class="post--img">
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
-                            </div>
-                            <div class="post--media">
-                                <img src="img/post.png" alt="postImg" class="post--img">
-                            </div>
-                        </div>
-                        <div class="post--footer">
-                            <ul class="tag--list">
-                                <li class="post--tag Inter">#Jazz</li>
-                                <li class="post--tag Inter">#Piano</li>
-                                <li class="post--tag Inter">#Live</li>
-                            </ul>
-                            <span class="post--location Inter"><img src="img/pin.png" alt="pin image"> Paris, France</span>
-                            <div class="post--actions">
-                                <div class="post--actions--left">
-                                    <div class="post--comment"><img src="img/commentIcon.png" alt="comment" id="post--comment--icon">12</div>
-                                    <div class="post--event"><img src="img/calendarIcon.png" alt="calendar" id="post--calendar--icon">Join event</div>
-                                </div>
-                                <div class="post--actions--right">
-                                    <img src="img/dots.png" alt="dots" class="post--dots">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="post">
-                        <div class="post--content">
-                            <div class="post--header">
-                                <img src="img/ppMan.png" alt="pp" class="post--header--img" />
-                                <div class="post--header--text">
-                                    <span class="card--username Inter">Robert Chen</span>
-                                    <span class="card--userID">@robertc 5h ago</span>
-                                    <div class="post--text Inter">
-                                        Looking for vinyl enthusiasts to share collection stories. Coffee meetup this Saturday!
+                                <div class="post--footer">
+                                    <ul class="tag--list">
+                                        <li class="post--tag Inter">#Music</li> 
+                                        <li class="post--tag Inter">#LinkUp</li>
+                                    </ul>
+                                    <div class="post--actions">
+                                        <div class="post--actions--left">
+                                            <div class="post--comment"><img src="img/commentIcon.png" alt="comment" id="post--comment--icon">0</div>
+                                            <div class="post--event"><img src="img/calendarIcon.png" alt="calendar" id="post--calendar--icon">Join event</div>
+                                        </div>
+                                        <div class="post--actions--right">
+                                            <img src="img/dots.png" alt="dots" class="post--dots">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="post--media"></div>
-                        </div>
-                        <div class="post--footer">
-                            <ul class="tag--list">
-                                <li class="post--tag Inter">#Vinyl</li>
-                                <li class="post--tag Inter">#Collectors</li>
-                                <li class="post--tag Inter">#Meetup</li>
-                            </ul>
-                            <span class="post--location Inter"><img src="img/pin.png" alt="pin image"> Lyon, France</span>
-                            <div class="post--actions">
-                                <div class="post--actions--left">
-                                    <div class="post--comment"><img src="img/commentIcon.png" alt="comment" id="post--comment--icon">12</div>
-                                    <div class="post--event"><img src="img/calendarIcon.png" alt="calendar" id="post--calendar--icon">Join event</div>
-                                </div>
-                                <div class="post--actions--right">
-                                    <img src="img/dots.png" alt="dots" class="post--dots">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="post">
-                        <div class="post--content">
-                            <div class="post--header">
-                                <img src="img/ppWoman_second.png" alt="pp" class="post--header--img" />
-                                <div class="post--header--text">
-                                    <span class="card--username Inter">Emma Williams</span>
-                                    <span class="card--userID">@emmaw 1d ago</span>
-                                    <div class="post--text Inter">
-                                        Starting a beginner guitar workshop next week. Intergenerational learning encouraged! 🎸
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post--media">
-                                <img src="img/post.png" alt="postImg" class="post--img">
-                            </div>
-                        </div>
-                        <div class="post--footer">
-                            <ul class="tag--list">
-                                <li class="post--tag Inter">#Guitar</li>
-                                <li class="post--tag Inter">#Workshop</li>
-                                <li class="post--tag Inter">#Beginners</li>
-                            </ul>
-                            <span class="post--location Inter"><img src="img/pin.png" alt="pin image"> Marseille, France</span>
-                            <div class="post--actions">
-                                <div class="post--actions--left">
-                                    <div class="post--comment"><img src="img/commentIcon.png" alt="comment" id="post--comment--icon">12</div>
-                                    <div class="post--event"><img src="img/calendarIcon.png" alt="calendar" id="post--calendar--icon">Join event</div>
-                                </div>
-                                <div class="post--actions--right">
-                                    <img src="img/dots.png" alt="dots" class="post--dots">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
-
-            <div class="sidePanel">
-                <section class="suggestions">
-                    <div class="suggestion">
-                        <div class="suggestion--left">
-                            <img src="img/ppSuggestion.png" alt="PP" class="suggestion--pp">
-                            <div class="suggestion--content">
-                                <span class="card--username Inter">Marie Dubois</span>
-                                <span class="card--userID Inter">@mariedubois</span>
-                                <ul class="card--language--list ">
-                                    <li class="card--language Inter">#Jazz</li>
-                                    <li class="card--language Inter">#Vocal</li>
-                                </ul>
-                                <span class="post--location Inter"><img src="img/pin.png" alt="pin image"> Marseille, France</span>
-                            </div>
-                        </div>
-                        <div class="suggestion--button--container">
-                            <input type="button" value="connect" class="suggestion--button ">
-                        </div>
-                    </div>
-
-                    <div class="suggestion">
-                        <div class="suggestion--left">
-                            <img src="img/ppMan_second.png" alt="PP" class="suggestion--pp">
-                            <div class="suggestion--content">
-                                <span class="card--username Inter">Jean Laurent</span>
-                                <span class="card--userID Inter">@jeanlaurent</span>
-                                <ul class="card--language--list">
-                                    <li class="card--language Inter">#Piano</li>
-                                    <li class="card--language Inter">#Classical</li>
-                                </ul>
-                                <span class="post--location Inter"><img src="img/pin.png" alt="pin image"> Lyon, France</span>
-                            </div>
-                        </div>
-                        <div class="suggestion--button--container">
-                            <input type="button" value="connect" class="suggestion--button">
-                        </div>
-                    </div>
-                </section>
-
-                <section class="trending">
-                    <h3 class="Inter">Trending boards</h3>
-                    <ul class="trending--list">
-                        <li class="trending--item">
-                            <div class="trending--content">
-                                <span class="trending--label Inter">Trending</span>
-                                <span class="trending--hashtag Inter">#Piano</span>
-                                <span class="trending--posts Inter">5155 posts</span>
-                            </div>
-                            <img src="img/musicIcon.png" alt="music" class="trending--icon">
-                        </li>
-                        <li class="trending--item">
-                            <div class="trending--content">
-                                <span class="trending--label Inter">Trending</span>
-                                <span class="trending--hashtag Inter">#Vinyl</span>
-                                <span class="trending--posts Inter">1053 posts</span>
-                            </div>
-                            <img src="img/musicIcon.png" alt="music" class="trending--icon">
-                        </li>
-                        <li class="trending--item">
-                            <div class="trending--content">
-                                <span class="trending--label Inter">Trending</span>
-                                <span class="trending--hashtag Inter">#CM</span>
-                                <span class="trending--posts Inter">6778 posts</span>
-                            </div>
-                            <img src="img/musicIcon.png" alt="music" class="trending--icon">
-                        </li>
-                        <li class="trending--item">
-                            <div class="trending--content">
-                                <span class="trending--label Inter">Trending</span>
-                                <span class="trending--hashtag Inter">#Guitar</span>
-                                <span class="trending--posts Inter">8104 posts</span>
-                            </div>
-                            <img src="img/musicIcon.png" alt="music" class="trending--icon">
-                        </li>
-                    </ul>
-                </section>
+            
             </div>
-        </div>
+
+        <script src="js/feed.js"></script>
 
         <?php
         $this->contenu = ob_get_clean();

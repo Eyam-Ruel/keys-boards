@@ -6,17 +6,22 @@
   --font: 'Outfit', sans-serif;
 }
 
-/* Sync with common.css thinner fonts */
-
+/* --- LE CONTENEUR PRINCIPAL (CORRIGÉ POUR COLLER AUX BORDS) --- */
 .messages-container {
   display: flex;
-  flex: 1;
   background: #ffffff;
-  padding-top: 57px; /* Thu nhỏ còn 1.5cm (57px) */
+  /* On calcule la hauteur pour qu'il n'y ait pas de trou en bas */
+  height: calc(100vh - 104px); 
+  /* On annule le padding du parent pour coller aux bords en haut et sur les côtés */
+  margin: -16px -24px -24px -24px; 
+  border-radius: 32px;
+  overflow: hidden;
 }
 
+/* --- SIDEBAR GAUCHE --- */
 .conversation-sidebar {
   width: 350px;
+  height: 100%; /* Pour coller de haut en bas */
   border-right: 1px solid #edf0f5;
   display: flex;
   flex-direction: column;
@@ -156,11 +161,13 @@
   border: 1px solid #ddd;
 }
 
+/* --- ZONE DE CHAT DROITE --- */
 .chat-area {
   flex: 1;
   display: flex;
   flex-direction: column;
   background: #fff;
+  height: 100%; /* Important pour coller de haut en bas */
 }
 
 .chat-header {
@@ -209,6 +216,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background: #fcfcfd;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -266,8 +274,10 @@
   text-align: right;
 }
 
+/* --- PIED DE PAGE DU CHAT (TOUT EN BAS) --- */
 .chat-footer {
-  padding: 24px;
+  padding: 20px 24px;
+  background: #fff;
   border-top: 1px solid #edf0f5;
 }
 
@@ -275,7 +285,7 @@
   display: flex;
   align-items: center;
   background: #ffffff;
-  border: none;
+  border: 1px solid #edf0f5; /* Ajout d'un petit bord pour la visibilité */
   border-radius: 12px;
   padding: 4px 6px 4px 16px;
 }
@@ -292,7 +302,7 @@
 }
 
 .btn-send {
-  background: #8b3a54; /* Màu đỏ đậm Burgundy */
+  background: #8b3a54; /* Bordeaux Burgundy */
   color: #fff;
   border: none;
   width: 40px;
@@ -306,7 +316,7 @@
 }
 
 .btn-send:hover {
-  background: #4a4edf;
+  background: #991F3B;
 }
 
 @media (max-width: 900px) {

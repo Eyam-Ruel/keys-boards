@@ -18,10 +18,10 @@ class User {
 
     public function inscrire($data, $files) {
         // 1. Nettoyage et formatage du pseudo
-        $pseudo = trim($data['pseudo']);
-        if (empty($pseudo)) return "Pseudo is required.";
-        if ($pseudo[0] !== '@') $pseudo = '@' . $pseudo;
-        $pseudo = str_replace(' ', '_', $pseudo);
+$pseudo = trim($data['pseudo']);
+if (empty($pseudo)) return "Pseudo is required.";
+$pseudo = str_replace('@', '', $pseudo); // ✅ On vire les @ éventuels
+$pseudo = str_replace(' ', '_', $pseudo);
 
         // 2. Vérification des doublons (Email & pseudp)
         if ($this->existeDeja('email', $data['email'])) {
@@ -108,9 +108,9 @@ class User {
     
         if (!$user) {
             // 2. S'il n'existe pas, on le crée
-            // On génère un pseudo automatique à partir du nom (ex: @jean_dupont_123)
-            $basePseudo = '@' . strtolower(str_replace(' ', '_', $data['name']));
-            $pseudo = $basePseudo . '_' . rand(100, 999); 
+// On enlève le '@' au début de la concaténation
+$basePseudo = strtolower(str_replace(' ', '_', $data['name'])); 
+$pseudo = $basePseudo . '_' . rand(100, 999);
 
             $sql = "INSERT INTO users (email, display_name, pseudo, profile_pic, banner_pic, created_at) 
                     VALUES (:email, :name, :pseudo, :pic, 'default_banner.jpg', NOW())";

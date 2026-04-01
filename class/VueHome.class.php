@@ -237,13 +237,13 @@ class VueHome {
                 <div class="topbar-right">
                     <div class="topbar-icons">
                         <button class="circle-btn">
-                            <img src="./img/icons/Icon.png" alt="Theme" class="topbar-icon-img">
+                            <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img">
                         </button>
                         
                         <div class="lang-dropdown-container">
-                            <button class="circle-btn" id="langToggleBtn" title="Changer de langue" style="font-size: 18px;">
-                                🌍
-                            </button>
+                        <button class="circle-btn" id="langToggleBtn" title="Changer de langue">
+    <img src="img/icons/Language.png" alt="Language icon" class="topbar-icon-img">
+</button>
                             <div class="lang-menu" id="langMenu">
                                 <a href="?lang=en" class="lang-option">🇬🇧 English</a>
                                 <a href="?lang=fr" class="lang-option">🇫🇷 Français</a>

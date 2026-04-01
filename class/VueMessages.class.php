@@ -2,12 +2,24 @@
 class VueMessages extends VueBase {
     public function __construct() {
         parent::__construct("Messages - LinkUp");
-        // On définit l'onglet actif pour la sidebar
         $this->actionActive = 'messages'; 
     }
 
     public function afficher() {
         global $trad; 
+        $pdo = Database::getLink();
+        $monId = $_SESSION['user_id'];
+
+        // ✅ REQUÊTE : On récupère les gens avec qui on a un historique de messages
+        $sql = "SELECT DISTINCT u.id, u.display_name, u.pseudo, u.profile_pic 
+                FROM users u
+                JOIN messages m ON (u.id = m.sender_id OR u.id = m.receiver_id)
+                WHERE (m.sender_id = :monId OR m.receiver_id = :monId)
+                AND u.id != :monId";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':monId' => $monId]);
+        $contacts = $stmt->fetchAll();
 
         ob_start(); 
         ?>
@@ -19,64 +31,51 @@ class VueMessages extends VueBase {
                 <div class="list-header">
                     <h2>Messages</h2>
                     <div class="search-box">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
                         <input type="text" placeholder="Search conversations...">
                     </div>
                 </div>
 
                 <div class="conv-list">
-                    <div class="conv-item active" onclick="selectChat('sophie', this)">
-                        <div class="conv-avatar"><img src="img/ppWoman.png" alt="Sophie Martin"></div>
-                        <div class="conv-info">
-                            <div class="conv-info-top">
-                                <span class="conv-name">Sophie Martin</span>
-                                <span class="conv-time">2h ago</span>
+                    <?php if(empty($contacts)): ?>
+                        <p style="padding: 20px; font-size: 14px; color: #888;">No conversations yet.</p>
+                    <?php else: ?>
+                        <?php foreach($contacts as $c): ?>
+                            <div class="conv-item" onclick="loadConversation(<?= $c['id'] ?>, '<?= htmlspecialchars($c['display_name']) ?>', '<?= htmlspecialchars($c['pseudo']) ?>', '<?= $c['profile_pic'] ?: 'img/ppMan.png' ?>', this)">
+                                <div class="conv-avatar">
+                                    <img src="<?= $c['profile_pic'] ?: 'img/ppMan.png' ?>" alt="">
+                                </div>
+                                <div class="conv-info">
+                                    <div class="conv-info-top">
+                                        <span class="conv-name"><?= htmlspecialchars($c['display_name']) ?></span>
+                                    </div>
+                                    <p class="conv-preview">@<?= htmlspecialchars($c['pseudo']) ?></p>
+                                </div>
                             </div>
-                            <p class="conv-preview">That sounds great! I'd love to collaborate...</p>
-                            <span class="conv-badge new">2 new</span>
-                        </div>
-                    </div>
-
-                    <div class="conv-item" onclick="selectChat('robert', this)">
-                        <div class="conv-avatar"><img src="img/ppMan.png" alt="Robert Chen"></div>
-                        <div class="conv-info">
-                            <div class="conv-info-top">
-                                <span class="conv-name">Robert Chen</span>
-                                <span class="conv-time">1d ago</span>
-                            </div>
-                            <p class="conv-preview">Hey! I saw your post about vinyl collecting.</p>
-                            <span class="conv-badge pending">Pending request</span>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </section>
 
             <section class="chat-area" id="chatArea">
-                <div class="chat-header">
+                <div class="chat-header" id="chatHeader" style="display: none;">
                     <div class="chat-user">
-                        <div class="chat-user-avatar"><img id="headerAvatar" src="img/ppWoman.png" alt=""></div>
+                        <div class="chat-user-avatar"><img id="headerAvatar" src="" alt=""></div>
                         <div class="chat-user-info">
-                            <h3 id="headerName">Sophie Martin</h3>
-                            <p id="headerUsername">@sophiemartin</p>
+                            <h3 id="headerName"></h3>
+                            <p id="headerUsername"></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="chat-messages" id="messagesLog">
-                    <div class="connection-notice">
-                        <p class="notice-text">Robert Chen wants to connect with you. Accepting this request will allow them to send you messages.</p>
-                        <div class="notice-actions">
-                            <button class="btn-accept">Accept Request</button>
-                            <button class="btn-decline">Decline</button>
-                        </div>
+                    <div class="empty-state">
+                        <p>Select a musician to start chatting 🎵</p>
                     </div>
                 </div>
 
-                <div class="chat-footer">
+                <div class="chat-footer" id="chatFooter" style="display: none;">
                     <div class="input-container">
+                        <input type="hidden" id="receiverId" value="">
                         <input type="text" id="messageInput" placeholder="Type a message...">
                         <button class="btn-send" onclick="sendMessage()">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
@@ -89,6 +88,7 @@ class VueMessages extends VueBase {
             </section>
         </main>
 
+        <script> const MON_ID = <?= $_SESSION['user_id'] ?>; </script>
         <script src="js/messages.js"></script>
 
         <?php

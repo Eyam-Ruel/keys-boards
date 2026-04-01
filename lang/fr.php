@@ -29,6 +29,10 @@ return [
     'board_electro' => 'Electro',
 
     // -- FOOTER --
+
+    'footer_title_legal' => 'Légal',
+    'footer_title_boards' => 'Forums Populaires',
+    'footer_title_connect' => 'Réseaux',
     'footer_slogan' => 'Partagez la musique à travers les générations.',
     'footer_link_about' => 'À propos',
     'footer_link_questions' => 'Questions',
@@ -394,5 +398,22 @@ return [
     'faq_contact_title' => 'Vous avez encore des questions ?',
     'faq_contact_text' => 'Si vous n\'avez pas trouvé la réponse que vous cherchiez, n\'hésitez pas à nous contacter.',
     'faq_contact_us' => 'Contactez-nous :',
+
+
+
+
+    //about us
+
+    'team_dept_dev' => 'Pôle Développement',
+    'team_dept_strategy' => 'Stratégie & Design UX/UI',
+    'team_dept_media' => 'Graphisme & Médias',
+    
+    'role_fullstack' => 'Développeur(se) Full-Stack',
+    'role_backend' => 'Développeur(se) Back-End',
+    'role_frontend' => 'Développeur(se) Front-End',
+    'role_ui_ux_legal' => 'UI/UX, Stratégie & Légal',
+    'role_comm' => 'Stratégie de Communication',
+    'role_graphic_video' => 'Designer Graphique & Vidéo',
+    'role_graphic' => 'Designer Graphique',
 
 ];

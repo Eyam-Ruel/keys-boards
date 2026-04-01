@@ -932,3 +932,58 @@ align-self: center;
     color: #666;
     font-size: 15px;
 }
+
+/* Style de base des boutons de navigation */
+.feed--nav--button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent; /* Trait invisible par défaut */
+}
+
+/* ✅ L'ÉTAT ACTIF : Le trait bordeaux apparaît ici */
+.active-tab {
+    color: #810F29 !important; /* Ta couleur bordeaux */
+    border-bottom: 3px solid #810F29 !important; /* Le trait sous le texte */
+    font-weight: bold;
+}
+
+/* Optionnel : petit effet au survol */
+.feed--nav--button:hover {
+    color: #810F29;
+}
+/* On réinitialise tous les boutons pour qu'ils n'aient AUCUNE barre par défaut */
+.feed--nav--button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #666;
+    border-bottom: 3px solid transparent; /* Barre invisible */
+    transition: all 0.2s ease;
+}
+
+/* ✅ SEUL celui qui a la classe .active-tab aura la barre bordeaux */
+.active-tab {
+    color: #810F29 !important;
+    border-bottom: 3px solid #810F29 !important; 
+    font-weight: bold;
+}
+
+/* On enlève d'éventuels styles qui ciblaient le premier enfant (first-child) */
+.feed--nav--button:first-child {
+    border-bottom: 3px solid transparent; 
+}
+
+/* On remet la barre SEULEMENT si c'est l'onglet actif */
+.feed--nav--button:first-child.active-tab {
+    border-bottom: 3px solid #810F29 !important;
+}
