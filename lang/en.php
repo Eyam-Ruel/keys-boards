@@ -109,7 +109,10 @@ return [
     'top_following' => 'Following',
     'pulse_new_post_placeholder' => 'What is trending today?',
     'btn_post' => 'Post',
+    'btn_cancel' => 'Cancel',
+    'create_post_title' => 'Create Post',
     'suggest_title' => 'You might like',
+
     'trending_title' => 'Trends for you',
     'trending_posts_count' => 'posts',
 

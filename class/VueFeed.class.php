@@ -54,7 +54,29 @@ class VueFeed extends VueBase {
                            class="feed--nav--button <?= ($currentView === 'following') ? 'active-tab' : '' ?>" 
                            onclick="switchFeed('following')">
                 </div>
-                
+
+                <div class="feed--create-post">
+                    <button id="openPostModal" class="create-post-btn"><?= $trad['btn_post'] ?? 'Publier' ?></button>
+                </div>
+
+                <div id="postModal" class="create-post-modal hide">
+                    <div class="create-post-card">
+                        <div class="create-post-header">
+                            <h3><?= $trad['create_post_title'] ?? 'Créer une publication' ?></h3>
+                            <button id="closePostModal" class="close-post-btn">&times;</button>
+                        </div>
+                        <form id="createPostForm" enctype="multipart/form-data">
+                            <textarea name="content" id="postContent" placeholder="<?= $trad['pulse_new_post_placeholder'] ?? 'Quoi de neuf aujourd\'hui ?' ?>" required></textarea>
+                            <input type="file" name="media" id="postMedia" accept="image/png,image/jpeg,image/jpg,image/gif" />
+                            <div class="create-post-actions">
+                                <button type="button" id="cancelPost" class="cancel-post-btn"><?= $trad['btn_cancel'] ?? 'Annuler' ?></button>
+                                <button type="submit" class="create-post-submit"><?= $trad['btn_post'] ?? 'Publier' ?></button>
+                            </div>
+                        </form>
+                        <div id="postMessage" class="post-message"></div>
+                    </div>
+                </div>
+
                 <div class="posts--container" id="posts-container">
                     <?php if (empty($posts)): ?>
                         <p style="text-align:center; padding:50px; color:#666;">No posts yet in this category. 🎸</p>

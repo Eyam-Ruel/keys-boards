@@ -215,6 +215,127 @@ ul {
     width: 100%;
 }
 
+.feed--create-post {
+    padding: 12px 16px;
+    border: 1px solid rgba(var(--darkred), 0.15);
+    background: #fff;
+}
+
+.create-post-btn {
+    color: white;
+    background-color: rgb(var(--darkred));
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.create-post-btn:hover {
+    opacity: 0.9;
+}
+
+.create-post-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.create-post-modal.hide {
+    display: none;
+}
+
+.create-post-card {
+    width: min(600px, 90%);
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    animation: fadeInModal 0.2s ease;
+}
+
+@keyframes fadeInModal {
+    from { transform: translateY(-12px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.create-post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.create-post-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-post-btn {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+#createPostForm textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid rgba(var(--darkred), 0.2);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 10px;
+}
+
+#createPostForm input[type="file"] {
+    margin-bottom: 12px;
+}
+
+.create-post-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cancel-post-btn,
+.create-post-submit {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cancel-post-btn {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.create-post-submit {
+    background: rgb(var(--darkred));
+    color: #fff;
+}
+
+.post-message {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.post-message.error {
+    color: #d32f2f;
+}
+
+.post-message.success {
+    color: #15803d;
+}
+
 .feed--nav--button:first-child {
     border-bottom: 4px solid rgb(var(--darkred));
     font-weight: bold;

@@ -109,7 +109,10 @@ return [
     'top_following' => 'Abonnements',
     'pulse_new_post_placeholder' => 'Quoi de neuf aujourd\'hui ?',
     'btn_post' => 'Publier',
+    'btn_cancel' => 'Annuler',
+    'create_post_title' => 'Créer une publication',
     'suggest_title' => 'Suggestions',
+
     'trending_title' => 'Tendances pour vous',
     'trending_posts_count' => 'publications',
 
