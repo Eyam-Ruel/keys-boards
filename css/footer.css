@@ -2,7 +2,7 @@
     border-top: 1px solid rgba(var(--darkred), 0.15);
 
     padding-top: 50px;
-    background-color: white;
+    background-color: var(--bg-sidebar, white);
     font-family: "Jost", sans-serif;
 
 }

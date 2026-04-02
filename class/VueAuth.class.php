@@ -220,6 +220,44 @@ class VueAuth {
                     --main-burgundy: #810F29;
                 }
 
+                body.dark-mode {
+                    --bg-topbar: #2a2a2a;
+                    --text-dark: #ffffff;
+                    --accent: #991F3B;
+                    --border-soft: #404040;
+                    --main-burgundy: #810F29;
+                    background: linear-gradient(180deg, #1a1a1a 0%, #1a1a1a 50%, #2a2a2a 100%) !important;
+                    color: #ffffff;
+                }
+
+                body.dark-mode .topbar {
+                    background: #2a2a2a;
+                    border-bottom-color: #404040;
+                }
+
+                body.dark-mode .auth-box {
+                    background: #2a2a2a;
+                    color: #ffffff;
+                    border-color: #404040;
+                }
+
+                body.dark-mode .auth-subtitle {
+                    color: #cccccc;
+                }
+
+                body.dark-mode input,
+                body.dark-mode textarea {
+                    background: #1a1a1a;
+                    color: #ffffff;
+                    border-color: #404040;
+                }
+
+                body.dark-mode svg path,
+                body.dark-mode svg circle,
+                body.dark-mode svg g {
+                    fill: #ffffff !important;
+                }
+
                 .auth-body { 
                     margin: 0; 
                     padding: 0; 
@@ -413,6 +451,35 @@ class VueAuth {
                                 langMenu.classList.remove("show");
                             }
                         });
+
+                        // Theme toggle functionality
+                        const themeToggleBtn = document.getElementById("themeToggleBtn");
+                        const themeIcon = document.getElementById("themeIcon");
+                        const body = document.body;
+
+                        if (themeToggleBtn && themeIcon) {
+                            // Load saved theme preference
+                            const savedTheme = localStorage.getItem("theme");
+                            if (savedTheme === "dark") {
+                                body.classList.add("dark-mode");
+                                themeIcon.src = "./img/icons/Dark Mode.png";
+                                themeIcon.alt = "Dark Mode";
+                            }
+
+                            // Toggle theme on button click
+                            themeToggleBtn.addEventListener("click", function(e) {
+                                e.preventDefault();
+                                body.classList.toggle("dark-mode");
+                                const isDark = body.classList.contains("dark-mode");
+                                
+                                // Update icon
+                                themeIcon.src = isDark ? "./img/icons/Dark Mode.png" : "./img/icons/Light Mode.png";
+                                themeIcon.alt = isDark ? "Dark Mode" : "Light Mode";
+                                
+                                // Save preference
+                                localStorage.setItem("theme", isDark ? "dark" : "light");
+                            });
+                        }
                     }
                 });
             </script>

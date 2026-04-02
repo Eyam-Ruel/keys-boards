@@ -18,6 +18,58 @@
     --age-card-secondColor-seniors: 129,15,41;
 }
 
+/* Dark mode for explore */
+body.dark-mode {
+    --lightblue: 30, 30, 30;
+    --red-text: 232, 232, 232;
+    --public-text: 176, 176, 176;
+}
+
+/* Dark mode - specific explore elements */
+body.dark-mode .main--header--filters {
+    color: var(--accent);
+}
+
+body.dark-mode .card--username {
+    color: var(--text-dark);
+}
+
+body.dark-mode .card--userID {
+    color: var(--text-muted);
+}
+
+body.dark-mode .card--desc {
+    color: var(--text-dark);
+}
+
+body.dark-mode .post--tag {
+    color: var(--text-dark);
+}
+
+body.dark-mode .span--profil {
+    color: var(--text-muted);
+}
+
+body.dark-mode #filter-select,
+body.dark-mode select {
+    background: var(--bg-sidebar);
+    color: var(--text-dark);
+    border-color: var(--border-soft);
+}
+
+body.dark-mode .btn-reply,
+body.dark-mode .btn-like,
+body.dark-mode .btn-share {
+    color: var(--text-dark);
+    border-color: var(--border-soft);
+}
+
+body.dark-mode .btn-reply:hover,
+body.dark-mode .btn-like:hover,
+body.dark-mode .btn-share:hover {
+    background: var(--bg-main);
+}
+
 .Inter{
     font-family: 'inter', sans-serif;
 }
@@ -43,6 +95,11 @@
 .switchBtn--active {
     background-color: white;
     border-radius: 14px;
+}
+
+/* Dark mode for switch button */
+body.dark-mode .switchBtn--active {
+    background-color: #3a3a3a;
 }
 
 .content {

@@ -10,6 +10,35 @@
   --profile-radius: 12px;
 }
 
+/* Dark mode for profile */
+body.dark-mode {
+  --profile-bg: #1e1e1e;
+  --profile-white: #121212;
+  --profile-text: #e8e8e8;
+  --profile-muted: #b0b0b0;
+  --profile-border: #2a2a2a;
+  --profile-accent: #ff6b9d;
+}
+
+/* Dark mode - specific profile elements */
+body.dark-mode .profile-info-box {
+  background: var(--profile-bg);
+  color: var(--profile-text);
+}
+
+body.dark-mode .profile-stat {
+  color: var(--profile-text);
+}
+
+body.dark-mode .profile-stat-label {
+  color: var(--profile-muted);
+}
+
+body.dark-mode .follow-btn {
+  background: var(--profile-accent);
+  color: white;
+}
+
 /* On ne touche PAS au header ni à l'aside ici, on laisse VueBase gérer */
 
 /* --- PROFILE HEADER & CONTENT --- */

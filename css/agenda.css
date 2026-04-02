@@ -14,6 +14,48 @@
   --agenda-radius: 10px;
 }
 
+/* Dark mode for agenda */
+body.dark-mode {
+  --agenda-bg: #1e1e1e;
+  --agenda-white: #121212;
+  --agenda-text: #e8e8e8;
+  --agenda-muted: #b0b0b0;
+  --agenda-border: #2a2a2a;
+  --agenda-accent: #ff6b9d;
+  --agenda-today: #ff6b9d;
+}
+
+/* Dark mode - specific agenda elements */
+body.dark-mode .legend {
+  color: var(--agenda-text);
+}
+
+body.dark-mode .btn-new {
+  color: #fff;
+  background: var(--agenda-burgundy);
+}
+
+body.dark-mode .btn-new:hover {
+  background: #a01840;
+}
+
+body.dark-mode .day-num {
+  color: var(--agenda-text);
+}
+
+body.dark-mode .cal-cell {
+  background: var(--agenda-white);
+  color: var(--agenda-text);
+}
+
+body.dark-mode .cal-cell.today {
+  background: rgba(255, 107, 157, 0.1);
+}
+
+body.dark-mode .cal-event {
+  color: #fff;
+}
+
 /* NOTE: On ne touche pas à body, header ou aside ici.
    On laisse ta VueBase gérer la structure globale.
 */

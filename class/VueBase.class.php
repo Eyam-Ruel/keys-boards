@@ -83,7 +83,7 @@ class VueBase {
             </a>
             <div class="topbar-right">
                 <div class="topbar-icons">
-                    <button class="circle-btn"><img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img"></button>
+                    <button class="circle-btn" id="themeToggleBtn" title="Changer de mode"><img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img" id="themeIcon"></button>
                     
                     <div class="lang-dropdown-container">
                         <button class="circle-btn" id="langToggleBtn" title="Changer de langue">
@@ -150,6 +150,41 @@ class VueBase {
             });
             window.addEventListener("click", function() {
                 document.getElementById("langMenu").classList.remove("show");
+            });
+
+            // Theme toggle functionality
+            document.addEventListener("DOMContentLoaded", function() {
+                const themeToggleBtn = document.getElementById("themeToggleBtn");
+                const themeIcon = document.getElementById("themeIcon");
+                const body = document.body;
+
+                if (!themeToggleBtn || !themeIcon) {
+                    console.error("Theme toggle elements not found");
+                    return;
+                }
+
+                // Load saved theme preference
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme === "dark") {
+                    body.classList.add("dark-mode");
+                    themeIcon.src = "./img/icons/Dark Mode.png";
+                    themeIcon.alt = "Dark Mode";
+                }
+
+                // Toggle theme on button click
+                themeToggleBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    body.classList.toggle("dark-mode");
+                    const isDark = body.classList.contains("dark-mode");
+                    
+                    // Update icon
+                    themeIcon.src = isDark ? "./img/icons/Dark Mode.png" : "./img/icons/Light Mode.png";
+                    themeIcon.alt = isDark ? "Dark Mode" : "Light Mode";
+                    
+                    // Save preference
+                    localStorage.setItem("theme", isDark ? "dark" : "light");
+                    console.log("Theme toggled to:", isDark ? "dark" : "light");
+                });
             });
         </script>
         </body>

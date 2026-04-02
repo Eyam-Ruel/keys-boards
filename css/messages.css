@@ -6,10 +6,40 @@
   --font: 'Outfit', sans-serif;
 }
 
+/* Dark mode for messages */
+body.dark-mode {
+  --msg-me: #7c82ff;
+  --msg-other: #262626;
+  --badge-new: #7c82ff;
+  --badge-pending: #1e1e1e;
+}
+
+/* Dark mode - specific messages elements */
+body.dark-mode .conversation-sidebar {
+  background: var(--bg-sidebar);
+  color: var(--text-dark);
+}
+
+body.dark-mode .conversation-item {
+  color: var(--text-dark);
+  border-color: var(--border-soft);
+}
+
+body.dark-mode .message-input {
+  background: var(--bg-sidebar);
+  color: var(--text-dark);
+  border-color: var(--border-soft);
+}
+
+body.dark-mode .badge {
+  background: var(--accent);
+  color: white;
+}
+
 /* --- LE CONTENEUR PRINCIPAL (CORRIGÉ POUR COLLER AUX BORDS) --- */
 .messages-container {
   display: flex;
-  background: #ffffff;
+  background: var(--bg-sidebar, #ffffff);
   /* On calcule la hauteur pour qu'il n'y ait pas de trou en bas */
   height: calc(100vh - 104px); 
   /* On annule le padding du parent pour coller aux bords en haut et sur les côtés */

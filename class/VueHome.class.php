@@ -25,6 +25,37 @@ class VueHome {
                     --text-dark: #2F0610;
                     --accent: #991F3B;
                     --border-soft: #F4F4F6;
+                    --bg-main: #ffffff;
+                    --bg-sidebar: #FFFFFF;
+                }
+
+                body.dark-mode {
+                    --bg-topbar: #2a2a2a;
+                    --text-dark: #ffffff;
+                    --accent: #991F3B;
+                    --border-soft: #404040;
+                    --bg-main: #1a1a1a;
+                    --bg-sidebar: #2a2a2a;
+                    background: #1a1a1a !important;
+                    color: #ffffff;
+                }
+
+                body.dark-mode .topbar {
+                    background: #2a2a2a;
+                    border-bottom-color: #404040;
+                }
+
+                body.dark-mode .public--ctaSection {
+                    background-color: #2a2a2a;
+                }
+
+                body.dark-mode .public--ctaSection--content h2 {
+                    color: #ffffff;
+                }
+
+                body.dark-mode svg path,
+                body.dark-mode svg circle {
+                    fill: #ffffff !important;
                 }
 
                 body { 
@@ -236,8 +267,8 @@ class VueHome {
 
                 <div class="topbar-right">
                     <div class="topbar-icons">
-                        <button class="circle-btn">
-                            <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img">
+                        <button class="circle-btn" id="themeToggleBtn" title="Changer de mode">
+                            <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img" id="themeIcon">
                         </button>
                         
                         <div class="lang-dropdown-container">
@@ -434,6 +465,33 @@ class VueHome {
                             if (!langToggleBtn.contains(event.target) && !langMenu.contains(event.target)) {
                                 langMenu.classList.remove('show');
                             }
+                        });
+
+                        // Theme toggle functionality
+                        const themeToggleBtn = document.getElementById('themeToggleBtn');
+                        const themeIcon = document.getElementById('themeIcon');
+                        const body = document.body;
+
+                        // Load saved theme preference
+                        const savedTheme = localStorage.getItem('theme');
+                        if (savedTheme === 'dark') {
+                            body.classList.add('dark-mode');
+                            themeIcon.src = './img/icons/Dark Mode.png';
+                            themeIcon.alt = 'Dark Mode';
+                        }
+
+                        // Toggle theme on button click
+                        themeToggleBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            body.classList.toggle('dark-mode');
+                            const isDark = body.classList.contains('dark-mode');
+                            
+                            // Update icon
+                            themeIcon.src = isDark ? './img/icons/Dark Mode.png' : './img/icons/Light Mode.png';
+                            themeIcon.alt = isDark ? 'Dark Mode' : 'Light Mode';
+                            
+                            // Save preference
+                            localStorage.setItem('theme', isDark ? 'dark' : 'light');
                         });
                     }
                 });

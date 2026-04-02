@@ -18,6 +18,43 @@
     --age-card-secondColor-seniors: 129,15,41;
 }
 
+/* Dark mode for home */
+body.dark-mode {
+    --lightblue: 30, 30, 30;
+    --red-text: 232, 232, 232;
+    --public-text: 176, 176, 176;
+}
+
+/* Dark mode - specific home elements */
+body.dark-mode .main--header--filters {
+    color: var(--accent);
+}
+
+body.dark-mode .card--username {
+    color: var(--text-dark);
+}
+
+body.dark-mode .card--userID {
+    color: var(--text-muted);
+}
+
+body.dark-mode .card--desc {
+    color: var(--text-dark);
+}
+
+body.dark-mode .post--tag {
+    color: var(--text-dark);
+}
+
+body.dark-mode span.age-label {
+    color: var(--text-dark);
+}
+
+body.dark-mode .age-card {
+    background: var(--bg-sidebar);
+    color: var(--text-dark);
+}
+
 /* //////////////////////////// EXPLORE PAGE //////////////////////////////////////////////////*/
 
 .switchBtn--content {
