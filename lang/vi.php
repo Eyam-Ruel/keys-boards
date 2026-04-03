@@ -29,6 +29,10 @@ return [
     'board_electro' => 'Electro',
 
     // -- FOOTER --
+
+    'footer_title_legal' => 'Pháp lý',
+    'footer_title_boards' => 'Bảng Phổ biến',
+    'footer_title_connect' => 'Kết nối',
     'footer_slogan' => 'Chia sẻ âm nhạc qua các thế hệ.',
     'footer_link_about' => 'Về chúng tôi',
     'footer_link_questions' => 'Câu hỏi',
@@ -395,6 +399,142 @@ return [
     'faq_contact_title' => 'Vẫn còn câu hỏi?',
     'faq_contact_text' => 'Nếu bạn không tìm thấy câu trả lời mà bạn đang tìm kiếm, xin đừng ngần ngại liên hệ với chúng tôi.',
     'faq_contact_us' => 'Liên hệ với chúng tôi:',
+
+
+
+    //about us
+
+    'team_dept_dev' => 'Nhóm Phát triển',
+    'team_dept_strategy' => 'Chiến lược & Thiết kế UX/UI',
+    'team_dept_media' => 'Đồ họa & Truyền thông',
+    
+    'role_fullstack' => 'Nhà phát triển Full-Stack',
+    'role_backend' => 'Nhà phát triển Back-End',
+    'role_frontend' => 'Nhà phát triển Front-End',
+    'role_ui_ux_legal' => 'UI/UX, Chiến lược & Pháp lý',
+    'role_comm' => 'Chiến lược Truyền thông',
+    'role_graphic_video' => 'Thiết kế Đồ họa & Video',
+    'role_graphic' => 'Thiết kế Đồ họa',
+
+
+
+
+
+    // -- EXPLORE PAGE --
+    'explore_title' => 'Khám phá Nhạc sĩ',
+    'explore_search_placeholder' => 'Tìm kiếm nhạc sĩ...',
+    'explore_list_view' => 'Xem dạng danh sách',
+    'explore_map_view' => 'Xem dạng bản đồ',
+    'explore_no_results' => 'Không tìm thấy nhạc sĩ nào.',
+    'explore_default_bio' => 'Sẵn sàng chơi nhạc!',
+    'explore_unknown_location' => 'Không rõ',
+    'btn_connect' => 'Kết nối',
+    'btn_followed' => 'Đang theo dõi',
+
+
+
+    // -- NOTIFICATIONS PAGE (Additions) --
+    'notif_subtitle' => 'Luôn cập nhật hoạt động từ cộng đồng âm nhạc của bạn.',
+    'notif_empty' => 'Không có thông báo nào lúc này. Hãy ra ngoài và kết nối!',
+    'notif_commented_post' => 'đã bình luận về bài viết của bạn:',
+    'notif_mention' => 'đã nhắc đến bạn trong một bài viết.',
+    'notif_event' => 'đã mời bạn tham gia một sự kiện.',
+    'notif_message' => 'đã gửi cho bạn một tin nhắn riêng tư.',
+    'notif_interacted' => 'đã tương tác với bạn.',
+    'time_just_now' => 'Vừa xong',
+    'time_min_ago' => 'phút trước',
+    'time_hours_ago' => 'giờ trước',
+
+
+
+    // -- FOLLOW PAGE --
+    'follow_main_title' => 'Kết nối của tôi',
+    'follow_subtitle' => 'Quản lý mạng lưới âm nhạc và cộng tác viên của bạn.',
+    'follow_no_results' => 'Không tìm thấy nhạc sĩ nào trong phần này.',
+    'follow_confirm_unfollow' => 'Bỏ theo dõi',
+    'btn_unfollow' => 'Bỏ theo dõi',
+    'btn_following' => 'Đang theo dõi',
+
+
+    // -- MESSAGES PAGE (Additions) --
+    'msg_no_conversations' => 'Chưa có cuộc trò chuyện nào.',
+    'msg_new_match' => 'Kết nối mới! Hãy gửi một tin nhắn...',
+    'msg_select_chat' => 'Chọn một nhạc sĩ để bắt đầu trò chuyện 🎵',
+
+
+
+    // -- AGENDA PAGE (Additions) --
+    'agenda_legend_public' => 'Sự kiện công khai',
+    'agenda_legend_shared' => 'Sự kiện được chia sẻ',
+    'agenda_legend_private' => 'Sự kiện riêng tư',
+    'agenda_upcoming_events' => 'Sự kiện sắp tới',
+    'agenda_new_event' => 'Sự kiện mới',
+    'agenda_event_name' => 'Tên sự kiện',
+    'agenda_event_desc' => 'Mô tả',
+    'agenda_event_date' => 'Ngày',
+    'agenda_event_visibility' => 'Hiển thị',
+    'agenda_event_start' => 'Thời gian bắt đầu',
+    'agenda_event_end' => 'Thời gian kết thúc',
+    'agenda_btn_delete' => 'Xóa',
+    'agenda_btn_save' => 'Lưu sự kiện',
+
+
+
+    // -- PROFILE PAGE (Additions) --
+    'profile_no_bio' => 'Chưa có tiểu sử.',
+    'profile_earth' => 'Trái đất',
+    'profile_joined' => 'Đã tham gia',
+    'tab_events' => 'Sự kiện',
+    'profile_no_posts' => 'Chưa có bài viết nào.',
+    'profile_delete_post_title' => 'Xóa bài viết',
+    'profile_no_events' => 'Không tìm thấy sự kiện nào.',
+    'profile_add_event_link' => 'Thêm một cuộc hẹn vào lịch',
+    'profile_event_untitled' => 'Chưa có tiêu đề',
+    'profile_event_label' => 'Mô tả: ',
+    'profile_event_no_desc' => 'Không có mô tả',
+    'profile_no_media' => 'Chưa tải lên phương tiện nào.',
+    'profile_banner_rec' => 'Kích thước khuyến nghị: 1200x300px',
+    'profile_confirm_delete' => 'Bạn có thực sự muốn xóa bài viết này không?',
+    'profile_error_delete' => 'Lỗi khi xóa: ',
+
+
+    // -- AJAX MESSAGES --
+    'ajax_me' => 'Tôi',
+    'ajax_error' => 'Đã xảy ra lỗi',
+
+
+    // -- AJAX POST CREATION ERRORS --
+    'ajax_err_session' => 'Phiên đã hết hạn.',
+    'ajax_err_empty' => 'Văn bản trống.',
+    'ajax_err_size' => 'Hình ảnh quá lớn so với máy chủ (Tối đa ~2MB).',
+    'ajax_err_upload' => 'Lỗi trong quá trình truyền tải hình ảnh.',
+    'ajax_err_format' => 'Định dạng hình ảnh không được hỗ trợ.',
+    'ajax_err_storage' => 'Lỗi lưu trữ trên máy chủ.',
+
+    // -- AJAX DELETE ERRORS --
+    'ajax_err_unauthorized' => 'Hành động không được phép.',
+    'ajax_err_not_found' => 'Không tìm thấy bài viết.',
+
+    // -- AJAX FOLLOW ERRORS/SUCCESS --
+    'ajax_follow_success' => 'Đã theo dõi thành công',
+    'ajax_unfollow_success' => 'Đã hủy theo dõi thành công',
+
+    // -- AJAX COMMENTS --
+    'ajax_no_comments' => 'Chưa có bình luận nào. Hãy là người đầu tiên!',
+
+
+    'ajax_err_unauthorized' => 'Hành động không được phép.',
+
+
+    // -- FEED / POSTS --
+    'btn_send' => 'Gửi',
+    'feed_show_all' => 'Xem tất cả',
+    'feed_comments' => 'bình luận...',
+
+    // -- AJAX LIKES --
+    'ajax_liked_success' => 'Đã thích bài viết',
+    'ajax_unliked_success' => 'Đã bỏ thích',
+    
 
 
 ];

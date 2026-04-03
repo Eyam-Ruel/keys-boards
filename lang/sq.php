@@ -29,6 +29,10 @@ return [
     'board_electro' => 'Elektro',
 
     // -- FOOTER --
+
+    'footer_title_legal' => 'Ligjore',
+    'footer_title_boards' => 'Bordet Popullore',
+    'footer_title_connect' => 'Rrjetet',
     'footer_slogan' => 'Ndajmë muzikën mes brezave.',
     'footer_link_about' => 'Rreth nesh',
     'footer_link_questions' => 'Pyetje',
@@ -340,5 +344,126 @@ return [
     'about_contact_address' => 'Adresa:',
     
     'about_footer_quote' => 'Bashkohuni me ne në ndërtimin e urave përmes muzikës',
+
+
+
+
+    //team about us
+
+    'team_dept_dev' => 'Ekipi i Zhvillimit',
+    'team_dept_strategy' => 'Strategjia & Dizajni UX/UI',
+    'team_dept_media' => 'Grafika & Media',
+    
+    'role_fullstack' => 'Zhvillues/e Full-Stack',
+    'role_backend' => 'Zhvillues/e Back-End',
+    'role_frontend' => 'Zhvillues/e Front-End',
+    'role_ui_ux_legal' => 'UI/UX, Strategji & Ligjore',
+    'role_comm' => 'Strategjia e Komunikimit',
+    'role_graphic_video' => 'Dizajner/e Grafik & Video',
+    'role_graphic' => 'Dizajner/e Grafik',
+
+
+
+
+
+    // -- EXPLORE PAGE --
+    'explore_title' => 'Eksploroni Muzikantët',
+    'explore_search_placeholder' => 'Kërko muzikantë...',
+    'explore_list_view' => 'Pamja e Listës',
+    'explore_map_view' => 'Pamja e Hartës',
+    'explore_no_results' => 'Nuk u gjet asnjë muzikant.',
+    'explore_default_bio' => 'Gati për të luajtur!',
+    'explore_unknown_location' => 'E panjohur',
+    'btn_connect' => 'Lidhu',
+    'btn_followed' => 'Duke ndjekur',
+
+
+
+    // -- FOLLOW PAGE --
+    'follow_main_title' => 'Lidhjet e mia',
+    'follow_subtitle' => 'Menaxhoni rrjetin tuaj muzikor dhe bashkëpunëtorët.',
+    'follow_no_results' => 'Nuk u gjet asnjë muzikant në këtë seksion.',
+    'follow_confirm_unfollow' => 'Mos ndiq më',
+    'btn_unfollow' => 'Mos ndiq më',
+    'btn_following' => 'Duke ndjekur',
+
+
+    // -- MESSAGES PAGE (Additions) --
+    'msg_no_conversations' => 'Asnjë bisedë ende.',
+    'msg_new_match' => 'Kontakt i ri! Dërgoni një mesazh...',
+    'msg_select_chat' => 'Zgjidhni një muzikant për të filluar bisedën 🎵',
+
+    // -- AGENDA PAGE (Additions) --
+    'agenda_legend_public' => 'Ngjarje Publike',
+    'agenda_legend_shared' => 'Ngjarje të Përbashkëta',
+    'agenda_legend_private' => 'Ngjarje Private',
+    'agenda_upcoming_events' => 'Ngjarjet e Ardhshme',
+    'agenda_new_event' => 'Ngjarje e Re',
+    'agenda_event_name' => 'Emri i Ngjarjes',
+    'agenda_event_desc' => 'Përshkrimi',
+    'agenda_event_date' => 'Data',
+    'agenda_event_visibility' => 'Dukshmëria',
+    'agenda_event_start' => 'Koha e Fillimit',
+    'agenda_event_end' => 'Koha e Përfundimit',
+    'agenda_btn_delete' => 'Fshi',
+    'agenda_btn_save' => 'Ruaj Ngjarjen',
+
+    // -- PROFILE PAGE (Additions) --
+    'profile_no_bio' => 'Nuk ka ende biografi.',
+    'profile_earth' => 'Toka',
+    'profile_joined' => 'U bashkua',
+    'tab_events' => 'Ngjarje',
+    'profile_no_posts' => 'Nuk ka ende postime.',
+    'profile_delete_post_title' => 'Fshi postimin',
+    'profile_no_events' => 'Nuk u gjet asnjë ngjarje.',
+    'profile_add_event_link' => 'Shto një takim në axhendë',
+    'profile_event_untitled' => 'I patitulluar',
+    'profile_event_label' => 'Përshkrimi: ',
+    'profile_event_no_desc' => 'Nuk ka përshkrim',
+    'profile_no_media' => 'Asnjë media e ngarkuar.',
+    'profile_banner_rec' => 'Madhësia e rekomanduar: 1200x300px',
+    'profile_confirm_delete' => 'A doni vërtet ta fshini këtë postim?',
+    'profile_error_delete' => 'Gabim gjatë fshirjes: ',
+
+
+    // -- AJAX MESSAGES --
+    'ajax_me' => 'Unë',
+    'ajax_error' => 'Ndodhi një gabim',
+
+
+
+    // -- AJAX POST CREATION ERRORS --
+    'ajax_err_session' => 'Sesioni ka skaduar.',
+    'ajax_err_empty' => 'Teksti është bosh.',
+    'ajax_err_size' => 'Imazhi është shumë i madh për serverin (Maksimumi ~2MB).',
+    'ajax_err_upload' => 'Gabim gjatë transferimit të imazhit.',
+    'ajax_err_format' => 'Formati i imazhit nuk mbështetet.',
+    'ajax_err_storage' => 'Gabim në ruajtjen në server.',
+
+    // -- AJAX DELETE ERRORS --
+    'ajax_err_unauthorized' => 'Veprim i paautorizuar.',
+    'ajax_err_not_found' => 'Postimi nuk u gjet.',
+
+    // -- AJAX FOLLOW ERRORS/SUCCESS --
+    'ajax_follow_success' => 'U ndoq me sukses',
+    'ajax_unfollow_success' => 'Nuk ndiqet më',
+
+
+    // -- AJAX COMMENTS --
+    'ajax_no_comments' => 'Asnjë koment ende. Bëhuni i pari!',
+
+    'ajax_err_unauthorized' => 'Veprim i paautorizuar.',
+
+    // -- FEED / POSTS --
+    'btn_send' => 'Dërgo',
+    'feed_show_all' => 'Shfaq të gjitha',
+    'feed_comments' => 'komentet...',
+
+    // -- AJAX LIKES --
+    'ajax_liked_success' => 'Postimi u pëlqye',
+    'ajax_unliked_success' => 'Pëlqimi u hoq',
+
+
+
 
 ];

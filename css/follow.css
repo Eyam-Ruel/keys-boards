@@ -1,0 +1,871 @@
+/* ---------- PALETTE ---------- */
+/* 810F29 (bordeaux), 2F0610 (très foncé), 000000, FFFFFF,
+   AAE9EE, 6A7282, 99A1AF, 991F3B, E7FBFB */
+   :root {
+    --bg-main: #ffffff;
+    --bg-sidebar: #FFFFFF;
+    --bg-topbar: #FFFFFF;
+    --bg-active: #810F29;
+    --text-dark: #2F0610;
+    --text-muted: #99A1AF;
+    --accent: #991F3B;
+    --counter: #810F29;
+    --border-soft: #F4F4F6;
+  }
+  
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-dark);
+  }
+  
+  /* ---------- TOPBAR ---------- */
+  
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-topbar);
+    border-bottom: 1px solid var(--border-soft);
+    z-index: 10;
+  }
+  
+  .logo {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.4px;
+    color: var(--accent);
+  }
+  
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .topbar-icons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .circle-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .topbar-icon-img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+  
+  .signout-btn {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+  }
+  
+  /* ---------- LAYOUT ---------- */
+  
+  .layout {
+    display: flex;
+    height: calc(100vh - 64px);
+    margin-top: 64px;
+  }
+  
+  /* ---------- SIDEBAR ---------- */
+  
+  .sidebar {
+    width: 210px;
+    background: var(--bg-sidebar);
+    padding: 25px 18px;
+    border-right: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .nav-menu {
+    margin-bottom: 40px;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 14px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link.active {
+    background: var(--bg-active);
+    color: #FFFFFF;
+  }
+  
+  /* icône PNG dans le menu */
+  .nav-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+  
+  /* ---------- MUSIC BOARDS ---------- */
+  
+  .sidebar-section {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 20px;
+  }
+  
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #810F29;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  
+  .tag-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  
+  .tag-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  /* icône PNG pour les boards */
+  .tag-img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+  }
+  
+  .tag-name {
+    color: var(--text-dark);
+  }
+  
+  .tag-count {
+    font-size: 11px;
+    color: var(--counter);
+  }
+  
+  /* ---------- MAIN PANEL ---------- */
+  
+  .main-area {
+    flex: 1;
+    padding: 16px 24px 24px 24px;
+  }
+  
+  .white-panel {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 32px;
+  }
+
+  /* ---------- AUTH PAGES (Connexion/Inscription) ---------- */
+
+.auth-body {
+    background: var(--bg-main); /* Le bleu clair E7FBFB */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-box {
+    background: #FFFFFF;
+    padding: 40px;
+    border-radius: 32px; /* Rappel du white-panel */
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.auth-logo {
+    color: var(--accent); /* Le bordeaux 991F3B */
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.auth-form {
+    margin-top: 24px;
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    font-family: inherit;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-active); /* Le bordeaux 810F29 */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.auth-switch {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.auth-switch a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.back-home {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.form-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 25px 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: var(--text-dark);
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 12px;
+    font-family: inherit;
+    resize: none;
+}
+
+
+
+/* ===== EXPLORE PAGE ===== */
+
+.kb-explore-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kb-page-heading__title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.kb-page-heading__subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Tabs */
+.kb-explore-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.kb-explore-tabs__item {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--border-soft);
+  border: none;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+.kb-explore-tabs__item--active {
+  background: var(--bg-active);
+  color: #FFFFFF;
+}
+
+/* Layout */
+.kb-explore-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Cards grid */
+.kb-explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Musician Card */
+.kb-musician-card {
+  background: var(--bg-sidebar);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-soft);
+}
+
+.kb-musician-card__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.kb-musician-card__identity {
+  display: flex;
+  gap: 12px;
+}
+
+.kb-musician-card__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--border-soft);
+}
+
+.kb-musician-card__name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.kb-musician-card__username,
+.kb-musician-card__location {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.kb-musician-card__description {
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.kb-musician-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.kb-tag {
+  background: var(--border-soft);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.kb-musician-card__followers {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* Follow button */
+.kb-follow-button {
+  background: var(--bg-active);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Map panel */
+.kb-map-panel {
+  background: var(--bg-sidebar);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-soft);
+}
+
+.kb-map-panel__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.kb-map-panel__title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.kb-map-panel__button {
+  background: var(--accent);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.kb-map-panel__map {
+  height: 300px;
+  background: var(--border-soft);
+  border-radius: 10px;
+}
+
+/* ===== PROFILE PAGE ===== */
+
+.kb-profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kb-profile-card {
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 700px;
+}
+
+.kb-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kb-profile-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.kb-profile-form__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kb-profile-form__input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-dark);
+  background: #FFFFFF;
+}
+
+.kb-profile-form__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  margin-top: 6px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.kb-profile-form__suggestion-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-dark);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.kb-profile-form__suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.kb-profile-form__suggestion-item:hover {
+  background: var(--bg-main);
+}
+
+.kb-profile-form__button {
+  align-self: flex-start;
+  background: var(--bg-active);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kb-explore-tabs__item {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.kb-follow-button--following {
+  background: var(--bg-main);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+
+/* ===== NOTIFICATIONS PAGE ===== */
+
+.kb-notifications-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kb-notifications-card {
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.kb-notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.kb-notification:last-child {
+  border-bottom: none;
+}
+
+.kb-notification__left {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+}
+
+.kb-notification__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--border-soft);
+  flex-shrink: 0;
+}
+
+.kb-notification__content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kb-notification__text {
+  font-size: 14px;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.kb-notification__username {
+  color: var(--text-muted);
+  margin-left: 6px;
+  margin-right: 4px;
+}
+
+.kb-notification__time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.kb-notification__right {
+  flex-shrink: 0;
+}
+
+.kb-notification__button {
+  background: var(--bg-active);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===== extra ===== */
+
+.kb-notification {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-notification:hover {
+  background: #fcfcfd;
+  transform: translateY(-1px);
+}
+
+.kb-notification--unread {
+  background: #f9fcfc;
+}
+
+.kb-notification--unread .kb-notification__text strong {
+  color: var(--accent);
+}
+
+.kb-notification__button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-notification__button:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.kb-explore-tabs__item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.kb-follow-button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-follow-button:hover {
+  transform: translateY(-1px);
+}
+
+.kb-map-panel__button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-map-panel__button:hover {
+  background: var(--bg-active);
+  transform: translateY(-1px);
+}
+
+.kb-profile-form__button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.kb-profile-form__button:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ========== RESPONSIVE FOLLOW PAGE ========== */
+
+@media (max-width: 1024px) {
+  /* Sur tablette, on passe le layout (Grille + Carte) sur une seule colonne */
+  .kb-explore-layout {
+    grid-template-columns: 1fr;
+  }
+  .kb-explore-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ajustement des titres */
+  .kb-page-heading__title {
+    font-size: 22px;
+  }
+
+  /* Tabs : on permet le défilement horizontal si trop de catégories */
+  .kb-explore-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Grille des musiciens : une seule colonne sur mobile */
+  .kb-explore-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Ajustement de la carte musicien pour gagner de la place */
+  .kb-musician-card {
+    padding: 12px;
+  }
+
+  .kb-musician-card__identity {
+    gap: 8px;
+  }
+
+  .kb-musician-card__avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .kb-musician-card__name {
+    font-size: 14px;
+  }
+
+  /* Le bouton suit dans le flux si le nom est trop long */
+  .kb-musician-card__top {
+    align-items: flex-start;
+  }
+
+  .kb-follow-button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Suppression des marges excessives sur très petits écrans */
+  .main-area {
+    padding: 10px;
+  }
+
+  .kb-explore-page {
+    gap: 16px;
+  }
+}
+
+/* ---------- RESPONSIVE FOLLOW & NOTIFICATIONS ---------- */
+
+@media (max-width: 768px) {
+  /* 1. On ajuste le conteneur global de la page */
+  .kb-notifications-page, 
+  .kb-explore-page {
+      gap: 16px;
+      padding: 10px;
+  }
+
+  /* 2. Titres de page */
+  .kb-page-heading__title {
+      font-size: 22px;
+      text-align: center;
+  }
+
+  .kb-page-heading__subtitle {
+      text-align: center;
+      margin-bottom: 10px;
+  }
+
+  /* 3. Onglets (Following / Followers) */
+  .kb-explore-tabs {
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+  }
+
+  .kb-explore-tabs__item {
+      flex: 1; /* Les onglets prennent toute la largeur à parts égales */
+      text-align: center;
+      font-size: 13px;
+      padding: 10px 5px;
+  }
+
+  /* 4. Cartes de notifications / Listes de follow */
+  .kb-notifications-card {
+      border-radius: 16px;
+  }
+
+  .kb-notification {
+      padding: 15px;
+      flex-direction: column; /* On empile texte et bouton sur mobile */
+      align-items: flex-start;
+      gap: 12px;
+  }
+
+  .kb-notification__left {
+      width: 100%;
+  }
+
+  .kb-notification__avatar {
+      width: 40px;
+      height: 40px;
+  }
+
+  /* 5. Le bouton d'action (Follow/Unfollow) à droite */
+  .kb-notification__right {
+      width: 100%; /* Le bouton prend toute la largeur sur mobile */
+  }
+
+  .kb-notification__button {
+      width: 100%;
+      padding: 12px;
+      text-align: center;
+  }
+
+  /* 6. Grille Explore (si utilisée dans Follow) */
+  .kb-explore-layout {
+      grid-template-columns: 1fr; /* Une seule colonne */
+  }
+
+  .kb-explore-grid {
+      grid-template-columns: 1fr; /* Les cartes de musiciens s'empilent */
+  }
+
+  /* Masquer la carte (Map) sur la page follow mobile pour gagner de l'espace */
+  .kb-map-panel {
+      order: 2; /* Passe après la liste */
+  }
+}
+
+/* Correction pour les très petits écrans (iPhone SE, etc.) */
+@media (max-width: 400px) {
+  .kb-notification__text {
+      font-size: 13px;
+  }
+  
+  .kb-notification__avatar {
+      width: 35px;
+      height: 35px;
+  }
+}

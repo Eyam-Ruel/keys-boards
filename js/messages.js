@@ -1,150 +1,190 @@
-const chats = {
-  sophie: {
-    name: "Sophie Martin",
-    username: "@sophiemartin",
-    avatar: "assets/avatar_sophie.png",
-    status: "active",
-    messages: [
-      {
-        type: "incoming",
-        text: "Hi Alex! I loved your recent composition post.",
-        time: "10:30 AM"
-      },
-      {
-        type: "outgoing",
-        text: "Thank you so much! Have you been working on anything new?",
-        time: "10:32 AM"
-      },
-      {
-        type: "incoming",
-        text: "That sounds great! I'd love to collaborate on that jazz piece.",
-        time: "10:35 AM"
-      }
-    ]
-  },
-  robert: {
-    name: "Robert Chen",
-    username: "@robertc",
-    avatar: "assets/avatar_robert.png",
-    status: "pending",
-    messages: [
-      {
-        type: "incoming",
-        text: "Hey! I saw your post about vinyl collecting.",
-        time: "Yesterday"
-      }
-    ]
-  },
-  emma: {
-    name: "Emma Williams",
-    username: "@emmaw",
-    avatar: "assets/avatar_emma.png",
-    status: "active",
-    messages: [
-      {
-        type: "incoming",
-        text: "Thanks for the guitar tips yesterday!",
-        time: "2 days ago"
-      }
-    ]
-  }
-};
+// Variable globale pour stocker l'identifiant du minuteur de rafraîchissement
+let chatInterval = null; 
 
-function selectChat(chatKey, element) {
-  // Update UI active state in list
-  document.querySelectorAll('.conv-item').forEach(item => item.classList.remove('active'));
-  element.classList.add('active');
+/**
+ * ===== CHARGER UNE CONVERSATION =====
+ * Appelé quand on clique sur un musicien à gauche dans la liste
+ */
+function loadConversation(contactId, name, pseudo, avatar, element) {
+    // 1. On arrête le rafraîchissement de la conversation précédente pour éviter les conflits
+    if (chatInterval) clearInterval(chatInterval);
 
-  const chat = chats[chatKey];
-  const chatArea = document.getElementById('chatArea');
-  
-  // Update Header
-  document.getElementById('headerAvatar').src = chat.avatar;
-  document.getElementById('headerName').innerText = chat.name;
-  document.getElementById('headerUsername').innerText = chat.username;
+    // 2. Mise à jour visuelle de la liste des contacts (gestion de l'état actif)
+    document.querySelectorAll('.conv-item').forEach(item => item.classList.remove('active'));
+    element.classList.add('active');
 
-  // Clear and update Messages log
+    // 3. Rendre l'interface de chat visible (en-tête et zone de saisie)
+    document.getElementById('chatHeader').style.display = 'flex';
+    document.getElementById('chatFooter').style.display = 'block';
+
+    // 4. Remplir dynamiquement les infos du header avec les données du contact
+    document.getElementById('headerAvatar').src = avatar;
+    document.getElementById('headerName').innerText = name;
+    // On s'assure qu'il n'y a qu'un seul "@" devant le pseudo
+    document.getElementById('headerUsername').innerText = "@" + pseudo.replace(/^@/, '');
+    document.getElementById('receiverId').value = contactId;
+
+    // 5. Premier appel pour charger immédiatement l'historique des messages
+    fetchMessages(contactId);
+
+    // 6. Lancement du "robot" (polling) qui vérifie les nouveaux messages toutes les 3 secondes (3000ms)
+    chatInterval = setInterval(() => {
+        fetchMessages(contactId);
+    }, 3000);
+
+    // Sur mobile, affiche la zone de chat par-dessus la liste
+    document.querySelector('.chat-area').classList.add('active');
+}
+
+/**
+ * ===== RÉCUPÉRER LES MESSAGES =====
+ * Interroge le serveur pour récupérer l'historique d'une conversation
+ */
+function fetchMessages(contactId) {
   const messagesLog = document.getElementById('messagesLog');
-  messagesLog.innerHTML = "";
+  const receiverIdInput = document.getElementById('receiverId');
 
-  // If pending, show connection notice
-  if (chat.status === 'pending') {
-    const notice = document.createElement('div');
-    notice.className = 'connection-notice';
-    notice.innerHTML = `
-      <div class="notice-text">
-        <strong>${chat.name}</strong> wants to connect with you. Accept to start chatting.
-      </div>
-      <div class="notice-actions">
-        <button class="btn-accept" onclick="acceptRequest('${chatKey}')">Accept</button>
-        <button class="btn-decline" onclick="declineRequest('${chatKey}')">Decline</button>
-      </div>
-    `;
-    messagesLog.appendChild(notice);
-  }
+  // Sécurité : On s'assure qu'on ne rafraîchit que si l'utilisateur est toujours sur la même conversation
+  if (receiverIdInput.value != contactId) return;
 
-  // Render messages
-  chat.messages.forEach(msg => {
+  fetch(`ajax_get_messages.php?contact_id=${contactId}`)
+      .then(response => response.json())
+      .then(data => {
+          // On compte le nombre de messages actuellement affichés
+          const currentDisplayCount = messagesLog.querySelectorAll('.message-node').length;
+          
+          // Si le nombre de messages a changé (nouveau message reçu ou envoyé), on met à jour l'affichage
+          if (data.length !== currentDisplayCount) {
+              let html = "";
+              
+              if (data.length === 0) {
+                  html = "<p class='notice-text'>No messages yet. Say hi! 👋</p>";
+              } else {
+                  // Boucle sur chaque message pour construire le HTML
+                  data.forEach(msg => {
+                      // On détermine si c'est un message envoyé ou reçu (nécessite que MON_ID soit défini)
+                      const type = (msg.sender_id == MON_ID) ? 'outgoing' : 'incoming';
+                      
+                      // Formatage de l'heure (HH:MM)
+                      const date = new Date(msg.created_at);
+                      const timeStr = date.getHours() + ":" + date.getMinutes().toString().padStart(2, '0');
+                      
+                      html += `
+                          <div class="message-node ${type}">
+                            <div class="message-content">
+                              <div class="bubble">${msg.message_text}</div>
+                              <div class="message-time">${timeStr}</div>
+                            </div>
+                          </div>`;
+                  });
+              }
+              
+              // Injection du HTML et défilement automatique vers le bas (dernier message)
+              messagesLog.innerHTML = html;
+              messagesLog.scrollTop = messagesLog.scrollHeight;
+          }
+      })
+      .catch(err => console.error("Erreur :", err));
+}
+
+// ===== begin of the code zone generated by Gemini ===
+
+/**
+ * ===== ENVOYER UN MESSAGE =====
+ */
+function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const text = input.value.trim();
+    const toId = document.getElementById('receiverId').value;
+
+    // On bloque l'envoi si le champ est vide ou si on n'a pas de destinataire
+    if (!text || !toId) return;
+
+    // Préparation des données pour la requête POST
+    const formData = new FormData();
+    formData.append('text', text);
+    formData.append('to_id', toId);
+
+    fetch('ajax_send_message.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // On vide le champ de saisie une fois le message envoyé
+            input.value = "";
+            // On force un rafraîchissement immédiat pour afficher notre propre message
+            fetchMessages(toId);
+        }
+    });
+}
+
+// ===== end of the code zone generated by Gemini ===
+
+
+/**
+ * ===== AFFICHER UNE BULLE DANS LE LOG (Fonction utilitaire) =====
+ * Permet d'injecter une bulle de message directement
+ */
+function renderMessage(text, time, type) {
+    const messagesLog = document.getElementById('messagesLog');
     const msgNode = document.createElement('div');
-    msgNode.className = `message-node ${msg.type}`;
+    msgNode.className = `message-node ${type}`;
     msgNode.innerHTML = `
       <div class="message-content">
-        <div class="bubble">${msg.text}</div>
-        <div class="message-time">${msg.time}</div>
+        <div class="bubble">${text}</div>
+        <div class="message-time">${time}</div>
       </div>
     `;
     messagesLog.appendChild(msgNode);
-  });
-
-  // Scroll to bottom
-  messagesLog.scrollTop = messagesLog.scrollHeight;
 }
 
-function acceptRequest(chatKey) {
-  chats[chatKey].status = 'active';
-  // Re-render
-  const activeItem = document.querySelector('.conv-item.active');
-  selectChat(chatKey, activeItem);
-  
-  // Update badge in list
-  activeItem.querySelector('.conv-badge')?.remove();
-}
+// ===== ÉVÉNEMENTS GLOBAUX =====
 
-function declineRequest(chatKey) {
-  alert("Request declined");
-}
-
-function sendMessage() {
-  const input = document.getElementById('messageInput');
-  const text = input.value.trim();
-  if (!text) return;
-
-  const msgNode = document.createElement('div');
-  msgNode.className = `message-node outgoing`;
-  const now = new Date();
-  const timeStr = now.getHours() + ":" + now.getMinutes().toString().padStart(2, '0') + " AM";
-  
-  msgNode.innerHTML = `
-    <div class="message-content">
-      <div class="bubble">${text}</div>
-      <div class="message-time">${timeStr}</div>
-    </div>
-  `;
-  
-  document.getElementById('messagesLog').appendChild(msgNode);
-  input.value = "";
-  document.getElementById('messagesLog').scrollTop = document.getElementById('messagesLog').scrollHeight;
-}
-
-// Handle Enter key for sending
-document.getElementById('messageInput')?.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    sendMessage();
-  }
+// Détecte l'appui sur la touche "Entrée" pour envoyer le message depuis l'input
+document.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && document.activeElement.id === 'messageInput') {
+        sendMessage();
+    }
 });
 
-// Initialize first chat
-window.onload = () => {
-    const firstItem = document.querySelector('.conv-item');
-    if (firstItem) selectChat('sophie', firstItem);
-};
+// ===== begin of the code zone generated by Gemini ===
+
+/**
+ * ===== SYSTÈME DE FOLLOW/UNFOLLOW =====
+ */
+function toggleFollow(userId, btn) {
+  const formData = new FormData();
+  formData.append('followed_id', userId);
+
+  fetch('ajax_follow.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      // Mise à jour visuelle du bouton selon la réponse du serveur
+      if (data.status === 'followed') {
+          btn.innerText = "Followed";
+          btn.style.backgroundColor = "#28a745"; // Vert succès
+          btn.style.border = "none";
+      } else if (data.status === 'removed') {
+          btn.innerText = "Connect";
+          btn.style.backgroundColor = ""; // Reprend la couleur du CSS par défaut
+          btn.style.border = "";
+      }
+  })
+  .catch(err => console.error("Erreur Follow:", err));
+}
+
+// ===== end of the code zone generated by Gemini ===
+
+
+/**
+ * ===== FERMER LE CHAT (Mobile) =====
+ */
+function closeChat() {
+    // Masque la zone de chat sur petit écran pour revenir à la liste des contacts
+    document.querySelector('.chat-area').classList.remove('active');
+}

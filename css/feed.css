@@ -932,3 +932,549 @@ align-self: center;
     color: #666;
     font-size: 15px;
 }
+
+/* Style de base des boutons de navigation */
+.feed--nav--button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent; /* Trait invisible par défaut */
+}
+
+/* ✅ L'ÉTAT ACTIF : Le trait bordeaux apparaît ici */
+.active-tab {
+    color: #810F29 !important; /* Ta couleur bordeaux */
+    border-bottom: 3px solid #810F29 !important; /* Le trait sous le texte */
+    font-weight: bold;
+}
+
+/* Optionnel : petit effet au survol */
+.feed--nav--button:hover {
+    color: #810F29;
+}
+/* On réinitialise tous les boutons pour qu'ils n'aient AUCUNE barre par défaut */
+.feed--nav--button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #666;
+    border-bottom: 3px solid transparent; /* Barre invisible */
+    transition: all 0.2s ease;
+}
+
+/* ✅ SEUL celui qui a la classe .active-tab aura la barre bordeaux */
+.active-tab {
+    color: #810F29 !important;
+    border-bottom: 3px solid #810F29 !important; 
+    font-weight: bold;
+}
+
+/* On enlève d'éventuels styles qui ciblaient le premier enfant (first-child) */
+.feed--nav--button:first-child {
+    border-bottom: 3px solid transparent; 
+}
+
+/* On remet la barre SEULEMENT si c'est l'onglet actif */
+.feed--nav--button:first-child.active-tab {
+    border-bottom: 3px solid #810F29 !important;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.comments-list {
+    margin-top: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    padding-top: 5px;
+}
+
+/* --- LE FOND SOMBRE DE LA MODALE --- */
+.create-post-modal {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 10000; /* Toujours au dessus de tout */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond noir transparent (effet grisé) */
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- LA CLASSE QUI AFFICHE LA MODALE --- */
+.create-post-modal.show {
+    display: flex !important;
+}
+
+/* On force la modale à se cacher si elle a la classe hide */
+.create-post-modal.hide {
+    display: none !important;
+}
+
+/* --- LA CARTE BLANCHE CENTRALE (DA) --- */
+.create-post-card {
+    background-color: #fff;
+    width: 100%;
+    max-width: 550px;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Ombre portée douce */
+    position: relative;
+    border: 1px solid rgba(var(--darkred), 0.1); /* Bordure discrète bordeaux */
+}
+
+/* --- LE HEADER (Titre + X) --- */
+.create-post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-post-header h3 {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-dark); /* Ton texte sombre */
+}
+
+/* Le bouton X de fermeture */
+.close-post-btn {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    color: #A3A3A3;
+    transition: color 0.2s;
+}
+
+.close-post-btn:hover {
+    color: var(--accent); /* Devient bordeaux au survol */
+}
+
+/* --- ZONE DE TEXTE (TEXTAREA) --- */
+#createPostForm textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid rgba(var(--darkred), 0.2); /* Bordure bordeaux discrète */
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#createPostForm textarea:focus {
+    border-color: var(--accent); /* Bordure bordeaux pleine au focus */
+}
+
+/* --- ZONE DES ACTIONS (Boutons + Icônes) --- */
+.create-post-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* Les petites icônes (image, vidéo) */
+.create-post-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.create-post-icons svg {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.4);
+    transition: color 0.2s;
+}
+
+.create-post-icons svg:hover {
+    color: var(--accent); /* Devient bordeaux au survol */
+}
+
+/* Les boutons d'action (Annuler + Publier) */
+.create-post-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cancel-post-btn,
+.create-post-submit {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.cancel-post-btn {
+    background: transparent;
+    color: #A3A3A3;
+}
+
+.cancel-post-btn:hover {
+    color: var(--text-dark);
+}
+
+.create-post-submit {
+    background-color: var(--accent); /* Ton bordeaux (#810F29) */
+    color: white;
+    padding: 10px 24px;
+}
+
+.create-post-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* --- PROTECTION DU LAYOUT GLOBAL --- */
+/* On force l'alignement à gauche de la zone principale UNIQUEMENT sur le feed */
+.main-area:has(.page-feed) {
+    display: flex !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+}
+
+/* --- LE BLOC FEED (Largeur 1000px, collé à gauche) --- */
+.page-feed .feed {
+    width: 1000px; 
+    max-width: 1000px; 
+    margin-left: 0; 
+    margin-right: auto; 
+    border-right: 1px solid #eee; 
+    background-color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BARRE DE NAVIGATION (For You / Following) --- */
+.page-feed .feed--nav {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    background: rgba(255, 255, 255, 0.9);
+    position: sticky; 
+    top: 0;
+    z-index: 10;
+}
+
+.page-feed .feed--nav--button {
+    flex: 1; 
+    padding: 20px 0;
+    text-align: center;
+    border: none;
+    background: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+/* Style du bouton actif */
+.page-feed .feed--nav--button.active-tab {
+    border-bottom: 3px solid #810F29; /* Ton bordeaux */
+    color: #810F29;
+}
+
+/* --- STYLE DES POSTS --- */
+.page-feed .post {
+    width: 100%; 
+    box-sizing: border-box; 
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    background: #fff;
+    min-height: 100px; 
+}
+
+/* Texte du post */
+.page-feed .post--text {
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Image et Media */
+.page-feed .post--media {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.page-feed .post--img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Header du post (PP et noms) */
+.page-feed .post--header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.page-feed .post--header--img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Le conteneur de l'image avec une hauteur fixe */
+.page-feed .post--media {
+    width: 100%;
+    height: 400px; /* On fixe la hauteur pour tout le monde */
+    margin-top: 15px;
+    border-radius: 16px;
+    overflow: hidden; /* Coupe ce qui dépasse */
+    border: 1px solid #eee;
+    background-color: #f8f8f8; /* Fond gris clair si l'image met du temps à charger */
+}
+
+/* L'image qui s'adapte à l'intérieur */
+.page-feed .post--img {
+    width: 100%;
+    height: 100%; /* Prend toute la hauteur du conteneur fixe */
+    display: block;
+    object-fit: cover; /* MAGIE : remplit le cadre sans déformer (recadre automatiquement) */
+    object-position: center; /* Centre l'image dans le cadre */
+    border-radius: 12px; /* Optionnel, car le parent a déjà un radius */
+}
+
+/* --- STYLE DES POSTS --- */
+.page-feed .post {
+    width: 100%; 
+    box-sizing: border-box; 
+    border-bottom: 1px solid #eee;
+    padding: 20px; /* Espace interne global du post */
+    background: #fff;
+    min-height: 100px; 
+}
+
+/* Texte du post */
+.page-feed .post--text {
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* --- LE CONTENEUR MEDIA (LA BOITE) --- */
+.page-feed .post--media {
+    width: 100%;          /* Prend toute la largeur disponible du post */
+    height: 450px;        /* Hauteur fixe imposée */
+    margin-top: 15px;
+    border-radius: 16px;
+    overflow: hidden;     /* Très important pour que l'image ne dépasse pas */
+    border: 1px solid #eee;
+    background-color: #f8f8f8;
+    position: relative;   /* Pour aider le positionnement interne */
+}
+
+/* --- L'IMAGE ELLE-MÊME (DOIT PRENDRE TOUTE LA BOITE) --- */
+.page-feed .post--img {
+    width: 100% !important;  /* Force la largeur à 100% de la boite */
+    height: 100% !important; /* Force la hauteur à 100% de la boite */
+    display: block;
+    object-fit: cover;       /* REMPLIT la boite sans déformer */
+    object-position: center; /* Centre l'image si elle est recadrée */
+}
+/* --- 1. LE POST (ON ENLÈVE LE PADDING GLOBAL) --- */
+.page-feed .post {
+    width: 100%; 
+    box-sizing: border-box; 
+    border-bottom: 1px solid #eee;
+    padding: 0; /* IMPÉRATIF : On met 0 pour que l'image puisse toucher les bords */
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 2. LE HEADER ET LE TEXTE (ON LEUR REMET DU PADDING) --- */
+.page-feed .post--header {
+    display: flex;
+    gap: 12px;
+    padding: 15px 20px; /* On remet l'espace ici */
+}
+
+.page-feed .post--text {
+    padding: 0 20px 15px 20px; /* On remet l'espace ici aussi */
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* --- 3. LE CONTENEUR IMAGE (WIDTH 100% SANS MARGES) --- */
+.page-feed .post--media {
+    width: 100%;          
+    height: 450px;        /* Garde ta hauteur fixe */
+    margin: 0;            /* On force la marge à 0 */
+    overflow: hidden;     
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+
+/* --- 4. L'IMAGE (DOIT TOUT MANGER) --- */
+.page-feed .post--img {
+    width: 100% !important;  
+    height: 100% !important; 
+    display: block;
+    object-fit: cover;       
+    object-position: center; 
+}
+
+/* --- 5. LE FOOTER (ON LUI REMET AUSSI DU PADDING) --- */
+.page-feed .post--footer {
+    padding: 15px 20px;
+}
+
+/* 1. Le conteneur (la boite grise avec l'arrondi) */
+.page-feed .post--media {
+    width: 100% !important; /* Force la boite à prendre toute la largeur du post */
+    height: 450px;          /* Ta hauteur fixe */
+    margin: 15px 0;         /* Espace en haut et en bas, mais 0 sur les côtés */
+    padding: 0 !important;  /* Sécurité : aucun espace interne dans la boite */
+    border-radius: 16px;
+    overflow: hidden;       /* Coupe l'image si elle dépasse */
+    background-color: #f8f8f8;
+    display: block;         /* Retire les comportements inline */
+}
+
+/* 2. L'image à l'intérieur (le bloc rouge) */
+.page-feed .post--img {
+    width: 100% !important;   /* OBLIGATOIRE : l'image DOIT faire 100% de la boite */
+    height: 100% !important;  /* OBLIGATOIRE : l'image DOIT faire 100% de la boite */
+    max-width: none !important; /* Annule d'éventuels max-width qui causeraient le trou */
+    display: block;
+    object-fit: cover;        /* Remplit tout sans déformer */
+    object-position: center;
+}
+
+/* ---------- RESPONSIVE GLOBAL ---------- */
+
+@media (max-width: 768px) {
+    /* 1. LAYOUT & STRUCTURE */
+    .content {
+        flex-direction: column; /* On empile tout verticalement */
+    }
+
+    main {
+        width: 100% !important; /* On prend toute la largeur */
+        padding: 10px !important;
+    }
+
+    /* 2. EXPLORE PAGE (Les cartes de musiciens) */
+    .card {
+        max-width: 100% !important; /* Une seule carte par ligne sur mobile */
+        width: 100% !important;
+        margin: 10px 0 !important;
+    }
+
+    .main--header {
+        flex-direction: column; /* Recherche au dessus des filtres */
+        gap: 15px;
+        padding: 0 15px;
+        align-items: flex-start;
+    }
+
+    /* 3. FEED PAGE (Le flux de posts) */
+    .page-feed .feed {
+        width: 100% !important; /* On enlève le 1000px fixe */
+        max-width: 100% !important;
+        border-right: none;
+    }
+
+    .page-feed .post--media {
+        height: 300px; /* On réduit la hauteur des images sur mobile */
+    }
+
+    .page-feed .post--header {
+        padding: 10px;
+    }
+
+    .feed--nav--button {
+        font-size: 14px; /* On réduit un peu la taille du texte des onglets */
+    }
+
+    /* 4. PUBLIC PAGE (Landing page) */
+    .public--firstSection--content h1 {
+        font-size: 40px; /* On divise la taille du titre par 2 */
+        text-align: center;
+    }
+
+    .intro--text {
+        font-size: 18px;
+        padding: 0 20px;
+    }
+
+    .ages--container, .goals--container {
+        flex-direction: column; /* Les boites d'âges et d'objectifs s'empilent */
+        max-width: 100%;
+        gap: 20px;
+    }
+
+    .age {
+        width: 100% !important; /* Les cartes d'âges prennent toute la largeur */
+        font-size: 16px;
+    }
+
+    /* 5. FAQ & ABOUT */
+    .faq--container, .faq--header-content {
+        padding: 20px;
+    }
+
+    .faq--header-content h1 {
+        font-size: 28px;
+    }
+
+    /* 6. SIDE PANELS (Suggestions / Trending) */
+    .sidePanel {
+        display: none; /* Souvent, on cache les suggestions à droite sur mobile pour alléger */
+    }
+}
+
+/* ---------- PETITES CORRECTIONS POUR TABLETTES ---------- */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .card {
+        max-width: 45%; /* 2 cartes par ligne sur tablette */
+    }
+    
+    .page-feed .feed {
+        width: 100% !important;
+    }
+}

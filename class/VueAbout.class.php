@@ -117,6 +117,13 @@ class VueAbout {
                 .about--list li { margin-bottom: 12px; color: var(--public-text); position: relative; list-style: none; }
                 .about--list li::before { content: '•'; color: rgb(var(--darkred)); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
 
+                /* TEAM CARDS CSS (Sans avatar) */
+                .team-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px; margin-bottom: 20px; }
+                .team-card { background: #F8F9FA; border-radius: 12px; padding: 25px 20px; text-align: center; width: 220px; border-top: 4px solid rgb(var(--darkred)); box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: transform 0.2s; }
+                .team-card:hover { transform: translateY(-5px); }
+                .team-name { font-size: 20px; font-weight: bold; color: #111; margin: 0 0 8px 0; font-family: "Jost", sans-serif; }
+                .team-role { font-size: 14px; color: #666; margin: 0; }
+
                 .about--footer-quote { margin-top: 50px; padding-top: 30px; border-top: 1px solid #EAEAEA; text-align: center; font-style: italic; color: #666; }
 
                 /* --- STYLE DU FOOTER EXACT --- */
@@ -138,6 +145,20 @@ class VueAbout {
                 
                 .footer--bottom { border-top: 1px solid rgba(var(--darkred), 0.15); text-align: center; padding: 30px 0; margin: 0 115px; }
                 .footer--bottom p { color: #333; font-size: 0.9rem; margin: 0; }
+
+                /* ✅ FORCE LA TAILLE DES ICÔNES DANS LA TOPBAR */
+.topbar-icon-img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* ✅ ALIGNE LES ICÔNES CÔTE À CÔTE */
+.topbar-icons {
+    display: flex;
+    gap: 10px; /* L'espace entre la lune et la planète */
+    align-items: center;
+}
             </style>
         </head>
         <body>
@@ -171,19 +192,23 @@ class VueAbout {
                 </a>
                 <div class="topbar-right">
                     <div class="topbar-icons">
+                        <button class="circle-btn">
+                            <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img">
+                        </button>
+                        
                         <div class="lang-dropdown-container">
-                            <button class="circle-btn" id="langToggleBtn" title="Changer de langue" style="font-size: 18px;">
-                                🌍
-                            </button>
+                        <button class="circle-btn" id="langToggleBtn" title="Changer de langue">
+    <img src="img/icons/Language.png" alt="Language icon" class="topbar-icon-img">
+</button>
                             <div class="lang-menu" id="langMenu">
-                                <a href="?action=about&lang=en" class="lang-option">🇬🇧 English</a>
-                                <a href="?action=about&lang=fr" class="lang-option">🇫🇷 Français</a>
-                                <a href="?action=about&lang=sq" class="lang-option">🇦🇱 Shqip</a>
-                                <a href="?action=about&lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
+                                <a href="?lang=en" class="lang-option">🇬🇧 English</a>
+                                <a href="?lang=fr" class="lang-option">🇫🇷 Français</a>
+                                <a href="?lang=sq" class="lang-option">🇦🇱 Shqip</a>
+                                <a href="?lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
                             </div>
                         </div>
                     </div>
-                    <button class="signout-btn" onclick="window.location.href='index.php'"><?= $trad['side_home'] ?? 'Home' ?></button>
+                    <button class="signout-btn" onclick="window.location.href='index.php?action=connexion'"><?= $trad['nav_signin'] ?? 'Sign in' ?></button>
                 </div>
             </header>
 
@@ -254,6 +279,71 @@ class VueAbout {
                     </section>
 
                     <section>
+                        <h2 class="about--section-title"><?= $trad['about_team_title'] ?? 'Meet the Team' ?></h2>
+                        
+                        <h3 style="color: #810F29; text-align: center; margin-top: 30px; font-family: 'Jost', sans-serif;"><?= $trad['team_dept_dev'] ?? 'Development Team' ?></h3>
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <h3 class="team-name">Selma Gosset--Petelet</h3>
+                                <p class="team-role"><?= $trad['role_fullstack'] ?? 'Full-Stack Developer' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Mohammed Benouda</h3>
+                                <p class="team-role"><?= $trad['role_fullstack'] ?? 'Full-Stack Developer' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Hoàng Khánh</h3>
+                                <p class="team-role"><?= $trad['role_backend'] ?? 'Back-End Developer' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Erika Krrashi</h3>
+                                <p class="team-role"><?= $trad['role_frontend'] ?? 'Front-End Developer' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Eyam Ruel</h3>
+                                <p class="team-role"><?= $trad['role_frontend'] ?? 'Front-End Developer' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Nguyễn Hoàng Đạt</h3>
+                                <p class="team-role"><?= $trad['role_frontend'] ?? 'Front-End Developer' ?></p>
+                            </div>
+
+                        </div>
+
+                        <h3 style="color: #810F29; text-align: center; margin-top: 30px; font-family: 'Jost', sans-serif;"><?= $trad['team_dept_strategy'] ?? 'Strategy & UX/UI Design' ?></h3>
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <h3 class="team-name">Rihab Doukkali El Uahabi</h3>
+                                <p class="team-role"><?= $trad['role_ui_ux_legal'] ?? 'UI/UX, Strategy & Legal' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Azad Oztopal</h3>
+                                <p class="team-role"><?= $trad['role_ui_ux_legal'] ?? 'UI/UX, Strategy & Legal' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Xhei Balliu</h3>
+                                <p class="team-role"><?= $trad['role_comm'] ?? 'Communication Strategy' ?></p>
+                            </div>
+                        </div>
+
+                        <h3 style="color: #810F29; text-align: center; margin-top: 30px; font-family: 'Jost', sans-serif;"><?= $trad['team_dept_media'] ?? 'Graphics & Media' ?></h3>
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <h3 class="team-name">Eva Poenou</h3>
+                                <p class="team-role"><?= $trad['role_graphic_video'] ?? 'Graphic Designer & Video' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Youssouf Larinouna</h3>
+                                <p class="team-role"><?= $trad['role_graphic_video'] ?? 'Graphic Designer & Video' ?></p>
+                            </div>
+                            <div class="team-card">
+                                <h3 class="team-name">Thadée Olivier--Dartigues</h3>
+                                <p class="team-role"><?= $trad['role_graphic'] ?? 'Graphic Designer' ?></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
                         <h2 class="about--section-title"><?= $trad['about_contact_title'] ?? 'Get in Touch' ?></h2>
                         <p class="about--text"><?= $trad['about_contact_text'] ?? 'We\'d love to hear from you! Whether you have questions, suggestions, or just want to share your experience with Keys & Boards, feel free to reach out.' ?></p>
                         <div class="about--box">
@@ -269,7 +359,7 @@ class VueAbout {
                 </div>
             </main>
 
-            <footer class="site--footer">
+<footer class="site--footer">
                 <div class="footer--main_content">
                     <div class="footer--column">
                         <h3 class="footer--brand"><a href="index.php" style="text-decoration: none; color: inherit;">Keys & Boards</a></h3>
@@ -285,7 +375,7 @@ class VueAbout {
                     </div>
 
                     <div class="footer--column footer--column-legal">
-                        <h3>Legal</h3>
+                        <h3><?= $trad['footer_title_legal'] ?? 'Legal' ?></h3>
                         <ul>
                             <li><a href="index.php?action=legal"><?= $trad['footer_link_legal_info'] ?? 'Legal information' ?></a></li>
                             <li><a href="index.php?action=terms"><?= $trad['footer_link_tos'] ?? 'User agreement and terms of service' ?></a></li>
@@ -294,7 +384,7 @@ class VueAbout {
                     </div>
 
                     <div class="footer--column">
-                        <h3>Popular Boards</h3>
+                        <h3><?= $trad['footer_title_boards'] ?? 'Popular Boards' ?></h3>
                         <ul>
                             <li><a href="#"><?= $trad['board_jazz_name'] ?? '#Jazz' ?></a></li>
                             <li><a href="#"><?= $trad['board_mao_name'] ?? '#MAO' ?></a></li>
@@ -303,9 +393,9 @@ class VueAbout {
                     </div>
 
                     <div class="footer--column">
-                        <h3>Connect</h3>
+                        <h3><?= $trad['footer_title_connect'] ?? 'Connect' ?></h3>
                         <ul>
-                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">X</a></li>
                             <li><a href="#">Instagram</a></li>
                             <li><a href="#">Facebook</a></li>
                         </ul>

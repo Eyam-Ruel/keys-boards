@@ -141,6 +141,19 @@ class VuePrivacy {
                 .footer--column ul { display: flex; flex-direction: column; gap: 12px; list-style: none !important; padding: 0 !important; margin: 0 !important; }
                 .footer--bottom { border-top: 1px solid rgba(var(--darkred), 0.15); text-align: center; padding: 30px 0; margin: 0 115px; }
                 .footer--bottom p { color: #333; font-size: 0.9rem; margin: 0; }
+
+                .topbar-icon-img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* ✅ ALIGNE LES ICÔNES CÔTE À CÔTE */
+.topbar-icons {
+    display: flex;
+    gap: 10px; /* L'espace entre la lune et la planète */
+    align-items: center;
+}
             </style>
         </head>
 
@@ -176,17 +189,23 @@ class VuePrivacy {
                 
                 <div class="topbar-right">
                     <div class="topbar-icons">
+                        <button class="circle-btn">
+                            <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img">
+                        </button>
+                        
                         <div class="lang-dropdown-container">
-                            <button class="circle-btn" id="langToggleBtn" title="Changer de langue" style="font-size: 18px;">🌍</button>
+                        <button class="circle-btn" id="langToggleBtn" title="Changer de langue">
+    <img src="img/icons/Language.png" alt="Language icon" class="topbar-icon-img">
+</button>
                             <div class="lang-menu" id="langMenu">
-                                <a href="?action=privacy&lang=en" class="lang-option">🇬🇧 English</a>
-                                <a href="?action=privacy&lang=fr" class="lang-option">🇫🇷 Français</a>
-                                <a href="?action=privacy&lang=sq" class="lang-option">🇦🇱 Shqip</a>
-                                <a href="?action=privacy&lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
+                                <a href="?lang=en" class="lang-option">🇬🇧 English</a>
+                                <a href="?lang=fr" class="lang-option">🇫🇷 Français</a>
+                                <a href="?lang=sq" class="lang-option">🇦🇱 Shqip</a>
+                                <a href="?lang=vi" class="lang-option">🇻🇳 Tiếng Việt</a>
                             </div>
                         </div>
                     </div>
-                    <button class="signout-btn" onclick="window.location.href='index.php'"><?= $trad['side_home'] ?? 'Home' ?></button>
+                    <button class="signout-btn" onclick="window.location.href='index.php?action=connexion'"><?= $trad['nav_signin'] ?? 'Sign in' ?></button>
                 </div>
             </header>
 

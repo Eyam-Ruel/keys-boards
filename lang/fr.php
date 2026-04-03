@@ -29,6 +29,10 @@ return [
     'board_electro' => 'Electro',
 
     // -- FOOTER --
+
+    'footer_title_legal' => 'Légal',
+    'footer_title_boards' => 'Forums Populaires',
+    'footer_title_connect' => 'Réseaux',
     'footer_slogan' => 'Partagez la musique à travers les générations.',
     'footer_link_about' => 'À propos',
     'footer_link_questions' => 'Questions',
@@ -394,5 +398,141 @@ return [
     'faq_contact_title' => 'Vous avez encore des questions ?',
     'faq_contact_text' => 'Si vous n\'avez pas trouvé la réponse que vous cherchiez, n\'hésitez pas à nous contacter.',
     'faq_contact_us' => 'Contactez-nous :',
+
+
+
+
+    //about us
+
+    'team_dept_dev' => 'Pôle Développement',
+    'team_dept_strategy' => 'Stratégie & Design UX/UI',
+    'team_dept_media' => 'Graphisme & Médias',
+    
+    'role_fullstack' => 'Développeur(se) Full-Stack',
+    'role_backend' => 'Développeur(se) Back-End',
+    'role_frontend' => 'Développeur(se) Front-End',
+    'role_ui_ux_legal' => 'UI/UX, Stratégie & Légal',
+    'role_comm' => 'Stratégie de Communication',
+    'role_graphic_video' => 'Designer Graphique & Vidéo',
+    'role_graphic' => 'Designer Graphique',
+
+
+
+
+
+    // -- EXPLORE PAGE --
+    'explore_title' => 'Explorer les musiciens',
+    'explore_search_placeholder' => 'Rechercher des musiciens...',
+    'explore_list_view' => 'Vue Liste',
+    'explore_map_view' => 'Vue Carte',
+    'explore_no_results' => 'Aucun musicien trouvé.',
+    'explore_default_bio' => 'Prêt à jouer !',
+    'explore_unknown_location' => 'Inconnu',
+    'btn_connect' => 'Se connecter',
+    'btn_followed' => 'Suivi',
+
+
+
+
+    // -- NOTIFICATIONS PAGE (Additions) --
+    'notif_subtitle' => 'Restez à l\'affût de l\'activité de votre communauté.',
+    'notif_empty' => 'Aucune notification pour le moment. Allez vous connecter !',
+    'notif_commented_post' => 'a commenté votre publication :',
+    'notif_mention' => 'vous a mentionné dans une publication.',
+    'notif_event' => 'vous a invité à un événement.',
+    'notif_message' => 'vous a envoyé un message privé.',
+    'notif_interacted' => 'a interagi avec vous.',
+    'time_just_now' => 'À l\'instant',
+    'time_min_ago' => 'min',
+    'time_hours_ago' => 'heures',
+
+
+
+    // -- FOLLOW PAGE --
+    'follow_main_title' => 'Mes Connexions',
+    'follow_subtitle' => 'Gérez votre réseau musical et vos collaborateurs.',
+    'follow_no_results' => 'Aucun musicien trouvé dans cette section.',
+    'follow_confirm_unfollow' => 'Ne plus suivre',
+    'btn_unfollow' => 'Ne plus suivre',
+    'btn_following' => 'Suivi',
+
+    // -- MESSAGES PAGE (Additions) --
+    'msg_no_conversations' => 'Aucune conversation pour le moment.',
+    'msg_new_match' => 'Nouveau contact ! Envoyez un message...',
+    'msg_select_chat' => 'Sélectionnez un musicien pour discuter 🎵',
+
+
+    // -- AGENDA PAGE (Additions) --
+    'agenda_legend_public' => 'Événements Publics',
+    'agenda_legend_shared' => 'Événements Partagés',
+    'agenda_legend_private' => 'Événements Privés',
+    'agenda_upcoming_events' => 'Événements à venir',
+    'agenda_new_event' => 'Nouvel Événement',
+    'agenda_event_name' => 'Nom de l\'événement',
+    'agenda_event_desc' => 'Description',
+    'agenda_event_date' => 'Date',
+    'agenda_event_visibility' => 'Visibilité',
+    'agenda_event_start' => 'Heure de début',
+    'agenda_event_end' => 'Heure de fin',
+    'agenda_btn_delete' => 'Supprimer',
+    'agenda_btn_save' => 'Enregistrer',
+
+
+
+    // -- PROFILE PAGE (Additions) --
+    'profile_no_bio' => 'Aucune biographie pour le moment.',
+    'profile_earth' => 'Terre',
+    'profile_joined' => 'A rejoint en',
+    'tab_events' => 'Événements',
+    'profile_no_posts' => 'Aucun post pour le moment.',
+    'profile_delete_post_title' => 'Supprimer le post',
+    'profile_no_events' => 'Aucun événement trouvé.',
+    'profile_add_event_link' => 'Ajouter un rendez-vous dans l\'agenda',
+    'profile_event_untitled' => 'Sans titre',
+    'profile_event_label' => 'Libellé : ',
+    'profile_event_no_desc' => 'Pas de description',
+    'profile_no_media' => 'Aucun média uploadé.',
+    'profile_banner_rec' => 'Taille recommandée : 1200x300px',
+    'profile_confirm_delete' => 'Voulez-vous vraiment supprimer ce post ?',
+    'profile_error_delete' => 'Erreur lors de la suppression : ',
+
+
+    // -- AJAX MESSAGES --
+    'ajax_me' => 'Moi',
+    'ajax_error' => 'Une erreur est survenue',
+
+
+    // -- AJAX POST CREATION ERRORS --
+    'ajax_err_session' => 'Session expirée.',
+    'ajax_err_empty' => 'Le texte est vide.',
+    'ajax_err_size' => 'L\'image est trop lourde pour le serveur (Max 2Mo env).',
+    'ajax_err_upload' => 'Erreur lors du transfert de l\'image.',
+    'ajax_err_format' => 'Format d\'image non supporté.',
+    'ajax_err_storage' => 'Erreur de stockage sur le serveur.',
+
+    // -- AJAX DELETE ERRORS --
+    'ajax_err_unauthorized' => 'Action non autorisée.',
+    'ajax_err_not_found' => 'Post introuvable.',
+
+    // -- AJAX FOLLOW ERRORS/SUCCESS --
+    'ajax_follow_success' => 'Utilisateur suivi avec succès',
+    'ajax_unfollow_success' => 'Utilisateur retiré de vos suivis',
+
+    // -- AJAX COMMENTS --
+    'ajax_no_comments' => 'Aucun commentaire. Soyez le premier !',
+
+    'ajax_err_unauthorized' => 'Action non autorisée.',
+
+    // -- FEED / POSTS --
+    'btn_send' => 'Envoyer',
+    'feed_show_all' => 'Voir les',
+    'feed_comments' => 'commentaires...',
+
+
+    // -- AJAX LIKES --
+    'ajax_liked_success' => 'Post liké',
+    'ajax_unliked_success' => 'Like retiré',
+
+
 
 ];

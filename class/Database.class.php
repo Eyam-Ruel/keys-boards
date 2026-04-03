@@ -1,10 +1,10 @@
 <?php
 class Database {
     private static $host = "localhost";
-    private static $db_name = "keys_boards"; 
-    private static $username = "root";       
-    private static $password = "root"; 
-    private static $port = "8889";
+    private static $db_name = "linkup";      
+    private static $username = "linkup";     
+    private static $password = "!*linkup2026"; 
+    private static $port = "3306";          
     private static $conn = null;
 
     public static function getLink() {

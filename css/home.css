@@ -690,3 +690,87 @@ strong {
 .white{
     color: white;
 }
+
+@media (max-width: 768px) {
+    /* Typography Scaling */
+    .public--firstSection--content h1 {
+      font-size: 36px;
+    }
+  
+    .intro--text {
+      font-size: 16px;
+    }
+  
+    .public--whoSection--content {
+      max-width: 90vw;
+    }
+  
+    /* Flexbox Stacking */
+    .goals--container,
+    .ages--container {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      max-width: 90vw;
+    }
+  
+    .goal,
+    .age {
+      width: 100%;
+    }
+  
+    /* Topbar Adjustment */
+    .topbar {
+      padding: 0 20px;
+    }
+  
+    .topbar-right {
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+  
+    .circle-btn {
+      width: 24px;
+      height: 24px;
+    }
+  
+    .topbar-icon-img {
+      width: 14px;
+      height: 14px;
+    }
+  
+    .signout-btn {
+      font-size: 12px;
+    }
+  
+    /* Video Container */
+    .video--container {
+      max-width: 100%;
+      margin: 20px auto;
+      border-radius: 12px;
+    }
+  
+    .video {
+      width: 100%;
+      height: auto;
+    }
+  
+    /* Footer */
+    .footer--main_content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+  
+    .footer--column {
+      margin-bottom: 20px;
+    }
+  
+    .footer--bottom {
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+  

@@ -932,3 +932,362 @@ align-self: center;
     color: #666;
     font-size: 15px;
 }
+
+.card {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pour que le bouton soit toujours en bas */
+    align-items: center;
+    border: 1px solid rgba(var(--darkred), 0.15);
+    border-radius: 12px;
+    margin: 10px;
+    
+    /* ✅ FIXER LA LARGEUR ICI */
+    width: 300px; 
+    min-height: 450px; /* Optionnel : pour qu'elles aient aussi la même hauteur */
+    
+    background-color: white; /* Pour éviter la transparence */
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+
+/* On s'assure que la description ne casse pas tout */
+.card--desc {
+    width: 90%; /* Plus large que les 65% actuels */
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    height: 60px; /* Fixer une hauteur pour la bio évite les décalages */
+    overflow: hidden; /* Coupe le texte si c'est trop long */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limite à 3 lignes */
+    -webkit-box-orient: vertical;
+}
+
+#view-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: flex-start; /* Aligne au début (gauche) */
+    padding-left: 0; /* Force le retrait de la marge interne gauche */
+    margin-left: -10px; /* Astuce pour compenser le margin des cartes */
+    width: 100%;
+}
+
+.card--languages span {
+    text-transform: capitalize;
+    transition: all 0.2s;
+}
+.card--languages span:hover {
+    background-color: #810F29 !important;
+    color: white !important;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+    .content {
+      flex-direction: column;
+    }
+  
+    .content aside {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    main {
+      width: 100%;
+      padding: 0 10px;
+    }
+  
+    .main--header {
+      flex-direction: column;
+      padding: 0 10px;
+      margin: 20px 0;
+    }
+  
+    .main--header--filters {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  
+    .main--header--search {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+  
+    .main--header--search input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  
+    .card {
+      max-width: 100%;
+      margin: 10px 0;
+    }
+  
+    .card--desc {
+      width: 90%;
+    }
+  
+    ul {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .post--tag {
+      font-size: 10px;
+      padding: 3px;
+    }
+  
+    .post--location {
+      font-size: 12px;
+    }
+  
+    .card--button {
+      font-size: 14px;
+      padding: 8px 0;
+      width: 100%;
+    }
+  
+    .switchBtn--content {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .switchBtn {
+      padding: 8px;
+      font-size: 10px;
+    }
+  
+    .switchBtn--active {
+      font-size: 10px;
+    }
+  
+    .faq--header {
+      padding: 40px 10px;
+    }
+  
+    .faq--main {
+      padding: 20px 10px;
+    }
+  
+    .faq--container {
+      padding: 20px;
+    }
+  
+    .public--firstSection--content h1 {
+      font-size: 40px;
+    }
+  
+    .intro--text {
+      font-size: 18px;
+    }
+  
+    .join--button {
+      font-size: 16px;
+      padding: 12px 20px;
+    }
+  
+    .public--videoSection h2 {
+      font-size: 24px;
+    }
+  
+    .public--whySection h2,
+    .public--whoSection h2 {
+      font-size: 32px;
+    }
+  
+    .public--text {
+      font-size: 14px;
+    }
+  
+    .goal {
+      padding: 20px;
+    }
+  
+    .ages--container {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  
+    .age {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    /* Hide the sidebar by default on mobile */
+    .content aside {
+      display: none;
+      position: fixed;
+      top: 64px; /* Adjust based on .topbar height */
+      left: 0;
+      width: 70%;
+      max-width: 250px;
+      height: 100%;
+      background-color: var(--bg-sidebar);
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    /* Show the sidebar when active */
+    .content aside.active {
+      transform: translateX(0);
+    }
+  
+    /* Hamburger menu button */
+    .hamburger-menu {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 16px;
+    }
+  
+    .hamburger-menu svg {
+      width: 24px;
+      height: 24px;
+      color: var(--text-dark);
+    }
+  
+    /* Resize .post--location image */
+    .post--location img {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  
+  /* ---------- RESPONSIVE EXPLORE ---------- */
+
+@media (max-width: 768px) {
+    /* 1. Ajustement du conteneur de contenu */
+    .content {
+        flex-direction: column;
+    }
+
+    /* 2. Header : on empile la recherche et les boutons */
+    .main--header {
+        flex-direction: column;
+        align-items: stretch; /* Prend toute la largeur */
+        padding: 0 15px;
+        margin: 20px 0;
+        gap: 15px;
+    }
+
+    .main--header--search {
+        background: #f8f9fb;
+        padding: 10px;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    .main--header--search input {
+        background: transparent;
+        width: 100%;
+    }
+
+    /* 3. Boutons Switch (List/Map) */
+    .switchBtn--content {
+        display: flex;
+        justify-content: center;
+        margin: 10px 15px;
+    }
+
+    .switchBtn {
+        flex: 1;
+        text-align: center;
+    }
+
+    /* 4. GRILLE DE CARTES : Le point critique */
+    #view-list {
+        justify-content: center;
+        margin-left: 0;
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .card {
+        /* On oublie les 300px fixes sur mobile */
+        width: 100% !important; 
+        max-width: 100% !important;
+        margin: 0;
+        min-height: auto; /* Laisse la carte s'adapter au contenu */
+        padding: 25px 15px;
+    }
+
+    /* On réajuste les éléments internes pour le mobile */
+    .card img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .card--desc {
+        width: 100%;
+        height: auto; /* On laisse la bio s'afficher entièrement sur mobile */
+        -webkit-line-clamp: unset; 
+        margin: 15px 0;
+    }
+
+    .card--button {
+        width: 100%; /* Bouton bien large pour le pouce */
+        padding: 15px 0;
+    }
+
+    /* 5. La Carte (Map View) */
+    #view-map {
+        margin-top: 10px;
+    }
+
+    #map {
+        height: 400px !important; /* Un peu moins haut sur petit écran */
+    }
+
+    /* 6. Public Page & FAQ (Ajustements rapides) */
+    .goals--container, .ages--container {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .goal, .age {
+        width: 100% !important;
+    }
+
+    .public--firstSection--content h1 {
+        font-size: 38px;
+    }
+}
+
+/* Tablette (2 cartes par ligne) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+/* Correction précise pour les icônes de localisation sur mobile */
+@media (max-width: 768px) {
+    /* Cible l'icône dans les cartes musiciens */
+    .card--location img, 
+    .post--location img {
+        width: 14px !important;  /* Force la taille */
+        height: 14px !important;
+        min-width: 14px;        /* Évite qu'elle disparaisse */
+        margin: 0 5px 0 0 !important; /* Ajuste l'espacement à côté du texte */
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* Aligne bien le texte à côté de la petite image */
+    .card--location, 
+    .post--location {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Centre si c'est dans une carte */
+        font-size: 13px;        /* Taille de texte adaptée */
+    }
+}

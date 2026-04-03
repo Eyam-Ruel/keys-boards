@@ -1,44 +1,39 @@
-// ===== TABS & NAVIGATION =====
-
-// Switch between tabs
+/**
+ * ===== TABS & NAVIGATION =====
+ * Gère l'affichage des onglets (Posts, Events, Media)
+ */
 function switchTab(tabName) {
-  // Hide all tab contents
+  // 1. On cache d'abord tous les contenus des onglets
   document.querySelectorAll('.tab-content').forEach(content => 
     content.classList.remove('active')
   );
 
-  // Remove active class from all buttons
+  // 2. On désactive visuellement tous les boutons
   document.querySelectorAll('.tab-btn').forEach(button => 
     button.classList.remove('active')
   );
 
-  // Show selected tab content & activate button
+  // 3. On affiche uniquement le contenu ciblé et on active son bouton
   const selectedContent = document.getElementById(`${tabName}-section`);
   if (selectedContent) {
     selectedContent.classList.add('active');
-    event.target.classList.add('active');
+    // Utilisation de event.currentTarget pour cibler précisément l'élément cliqué
+    if (window.event) window.event.currentTarget.classList.add('active');
   }
 }
 
-// Sidebar navigation
-function navigate(element) {
-  document.querySelectorAll('.nav-item').forEach(el => 
-    el.classList.remove('active')
-  );
-  element.classList.add('active');
-}
-
-// ===== EDIT PROFILE MODAL =====
-
+/**
+ * ===== GESTION DE LA MODAL D'ÉDITION =====
+ */
 function openEditModal() {
   const modal = document.getElementById('edit-profile-modal');
   if (!modal) return;
   
   modal.style.display = 'flex';
-  // Trigger animation after display is set
+  // Petit délai (10ms) pour laisser l'animation CSS d'apparition se déclencher
   setTimeout(() => modal.classList.add('active'), 10);
-  document.body.style.overflow = 'hidden'; // Prevent background scroll
-  updateCharCount();
+  // On empêche le défilement de la page en arrière-plan
+  document.body.style.overflow = 'hidden'; 
 }
 
 function closeEditModal() {
@@ -46,175 +41,91 @@ function closeEditModal() {
   if (!modal) return;
   
   modal.classList.remove('active');
-  // Wait for animation to finish before hiding
+  // On attend la fin de l'animation avant de masquer la modal (200ms)
   setTimeout(() => { modal.style.display = 'none'; }, 200);
+  // On réactive le défilement de la page
   document.body.style.overflow = '';
 }
 
-// Modal: Close on overlay click
+// Permet de fermer la modal si on clique à l'extérieur de celle-ci (sur le fond sombre)
 document.getElementById('edit-profile-modal')?.addEventListener('click', (e) => {
   if (e.target.id === 'edit-profile-modal') closeEditModal();
 });
 
-// Modal: Close on Escape key
-document.addEventListener('keydown', (e) => {
-  const modal = document.getElementById('edit-profile-modal');
-  if (e.key === 'Escape' && modal?.style.display === 'flex') {
-    closeEditModal();
-  }
-});
-
-// ===== FORM UTILITIES =====
-
-// Character counter for bio textarea
-function updateCharCount() {
-  const bio = document.getElementById('edit-bio');
-  const counter = document.getElementById('char-count');
-  if (!bio || !counter) return;
-  
-  const count = bio.value.length;
-  counter.textContent = `${count}/500 characters`;
-  counter.style.color = count > 450 ? 'var(--error)' : 'var(--muted)';
-}
-
-// File upload preview handler
+/**
+ * ===== PREVIEW DES FICHIERS (AVATAR & BANNIÈRE) =====
+ */
 function setupFilePreview(inputId, infoId) {
   const input = document.getElementById(inputId);
   const info = document.getElementById(infoId);
   if (!input || !info) return;
   
+  // Quand un fichier est sélectionné, on met à jour le texte pour confirmer
   input.addEventListener('change', function() {
     if (this.files?.[0]) {
       info.textContent = `✓ ${this.files[0].name}`;
-      info.style.color = 'var(--success)';
+      info.style.color = '#27ae60'; // Texte en vert pour indiquer le succès
     }
   });
 }
 
-// ===== TAGS MANAGEMENT =====
-
-function removeTag(btn) {
-  btn.parentElement?.remove();
+/**
+ * ===== SOUMISSION DU FORMULAIRE =====
+ * Le PHP gère la vraie sauvegarde, on affiche juste un retour visuel (Toast)
+ */
+function handleProfileUpdate(e) {
+  // Attention : on ne fait PAS e.preventDefault() ! 
+  // On veut laisser le formulaire partir normalement vers index.php?action=doUpdateProfile
+  
+  showToast('Saving changes to server...', 'success');
+  
+  // La page va se recharger toute seule une fois le traitement PHP terminé
 }
 
-function addTag() {
-  const input = document.getElementById('tag-input');
-  const container = document.getElementById('tags-container');
-  if (!input || !container) return;
-  
-  let value = input.value.trim();
-  if (!value) return;
-  
-  // Auto-add # if missing
-  if (!value.startsWith('#')) value = '#' + value;
-  
-  const tag = document.createElement('span');
-  tag.className = 'tag';
-  tag.innerHTML = `${value} <button type="button" class="tag-remove" onclick="removeTag(this)">×</button>`;
-  container.appendChild(tag);
-  input.value = '';
-  input.focus();
-}
-
-// ===== TOAST NOTIFICATIONS =====
-
+// ===== begin of the code zone generated by Gemini ===
+/**
+ * ===== NOTIFICATIONS (TOASTS) =====
+ */
 function showToast(message, type = 'success') {
   const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  
+  // Style en ligne pour le toast pour qu'il soit indépendant du fichier CSS global
   toast.style.cssText = `
     position: fixed;
     bottom: 24px;
     right: 24px;
     padding: 14px 24px;
-    background: ${type === 'success' ? 'var(--success)' : 'var(--error)'};
+    background: ${type === 'success' ? '#810F29' : '#e74c3c'};
     color: white;
-    border-radius: var(--radius-sm);
+    border-radius: 8px;
     font-weight: 500;
-    font-family: var(--font);
-    box-shadow: var(--shadow-lg);
-    z-index: 2000;
-    animation: toastSlide 0.3s ease;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   `;
   toast.textContent = message;
   document.body.appendChild(toast);
   
-  // Inject animation keyframes if not already present
-  if (!document.getElementById('toast-anim')) {
-    const style = document.createElement('style');
-    style.id = 'toast-anim';
-    style.textContent = `
-      @keyframes toastSlide {
-        from { transform: translateX(100px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-  
-  // Auto-dismiss with fade out
+  // Disparition automatique après 3 secondes (3000ms)
   setTimeout(() => {
-    toast.style.animation = 'toastSlide 0.3s ease reverse';
-    setTimeout(() => toast.remove(), 300);
+    toast.style.opacity = '0';
+    toast.style.transition = '0.5s';
+    setTimeout(() => toast.remove(), 500); // On retire l'élément du DOM après l'animation
   }, 3000);
 }
+// ===== end of the code zone generated by Gemini ===
 
-// ===== FORM SUBMISSION =====
-
-function handleProfileUpdate(e) {
-  e.preventDefault();
-  
-  // Collect form data safely
-  const getData = (id) => document.getElementById(id)?.value || '';
-  
-  const data = {
-    displayName: getData('edit-display-name'),
-    username: getData('edit-username'),
-    bio: getData('edit-bio'),
-    city: getData('edit-city'),
-    country: getData('edit-country'),
-  };
-  
-  // Update profile UI in real-time
-  if (data.displayName) document.querySelector('.profile-name').textContent = data.displayName;
-  if (data.username) document.querySelector('.profile-title').textContent = `@${data.username}`;
-  if (data.bio) document.querySelector('.profile-bio').textContent = data.bio;
-  if (data.city && data.country) {
-    const locationSpan = document.querySelector('.profile-meta span:first-child');
-    if (locationSpan) locationSpan.innerHTML = `📍 ${data.city}, ${data.country}`;
-  }
-  
-  // Close modal & show feedback
-  closeEditModal();
-  showToast('✅ Profile updated successfully!', 'success');
-  
-  // 🔥 TODO: Send to backend
-  // fetch('/api/profile', {
-  //   method: 'PUT',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(data)
-  // });
-}
-
-// ===== INITIALIZATION =====
-
+/**
+ * ===== INITIALISATION AU CHARGEMENT =====
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  // Activate first tab by default
-  document.querySelector('.tab-btn')?.classList.add('active');
-  
-  // Initialize file previews
+  // Initialisation des textes de preview pour les uploads d'images
   setupFilePreview('banner-upload', 'banner-info');
   setupFilePreview('avatar-upload', 'avatar-info');
   
-  // Bind bio character counter
-  document.getElementById('edit-bio')?.addEventListener('input', updateCharCount);
-  
-  // Bind tag input: Enter key to add
-  document.getElementById('tag-input')?.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addTag();
-    }
-  });
-  
-  // Bind form submission
-  document.getElementById('edit-profile-form')?.addEventListener('submit', handleProfileUpdate);
+  // On connecte la fonction de soumission visuelle au formulaire d'édition
+  const editForm = document.getElementById('edit-profile-form');
+  if (editForm) {
+    editForm.addEventListener('submit', handleProfileUpdate);
+  }
 });

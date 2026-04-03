@@ -28,7 +28,13 @@ return [
     'board_rock' => 'Rock',
     'board_electro' => 'Electro',
 
+
+
     // -- FOOTER --
+
+    'footer_title_legal' => 'Legal',
+    'footer_title_boards' => 'Popular Boards',
+    'footer_title_connect' => 'Connect',
     'footer_slogan' => 'Share music across generations.',
     'footer_link_about' => 'About us',
     'footer_link_questions' => 'Questions',
@@ -393,6 +399,141 @@ return [
     'faq_contact_title' => 'Still have questions?',
     'faq_contact_text' => 'If you couldn\'t find the answer you were looking for, please don\'t hesitate to reach out to us.',
     'faq_contact_us' => 'Contact us:',
+
+
+
+    //team dans about us
+
+    'team_dept_dev' => 'Development Team',
+    'team_dept_strategy' => 'Strategy & UX/UI Design',
+    'team_dept_media' => 'Graphics & Media',
+    
+    'role_fullstack' => 'Full-Stack Developer',
+    'role_backend' => 'Back-End Developer',
+    'role_frontend' => 'Front-End Developer',
+    'role_ui_ux_legal' => 'UI/UX, Strategy & Legal',
+    'role_comm' => 'Communication Strategy',
+    'role_graphic_video' => 'Graphic Designer & Video',
+    'role_graphic' => 'Graphic Designer',
+
+
+
+    // -- EXPLORE PAGE --
+    'explore_title' => 'Explore Musicians',
+    'explore_search_placeholder' => 'Search musicians...',
+    'explore_list_view' => 'List View',
+    'explore_map_view' => 'Map View',
+    'explore_no_results' => 'No musicians found.',
+    'explore_default_bio' => 'Ready to jam!',
+    'explore_unknown_location' => 'Unknown',
+    'btn_connect' => 'Connect',
+    'btn_followed' => 'Followed',
+
+
+
+
+
+    // -- NOTIFICATIONS PAGE (Additions) --
+    'notif_subtitle' => 'Stay updated with activity from your music community.',
+    'notif_empty' => 'No notifications for the moment. Get out there and connect!',
+    'notif_commented_post' => 'commented on your post:',
+    'notif_mention' => 'mentioned you in a post.',
+    'notif_event' => 'invited you to an event.',
+    'notif_message' => 'sent you a private message.',
+    'notif_interacted' => 'interacted with you.',
+    'time_just_now' => 'Just now',
+    'time_min_ago' => 'min ago',
+    'time_hours_ago' => 'hours ago',
+
+
+
+    // -- FOLLOW PAGE --
+    'follow_main_title' => 'My Connections',
+    'follow_subtitle' => 'Manage your musical network and collaborators.',
+    'follow_no_results' => 'No musicians found in this section.',
+    'follow_confirm_unfollow' => 'Unfollow',
+    'btn_unfollow' => 'Unfollow',
+    'btn_following' => 'Following',
+
+
+    // -- MESSAGES PAGE (Additions) --
+    'msg_no_conversations' => 'No conversations yet.',
+    'msg_new_match' => 'New match! Send a message...',
+    'msg_select_chat' => 'Select a musician to start chatting 🎵',
+
+
+    // -- AGENDA PAGE (Additions) --
+    'agenda_legend_public' => 'Public Events',
+    'agenda_legend_shared' => 'Shared Events',
+    'agenda_legend_private' => 'Private Events',
+    'agenda_upcoming_events' => 'Upcoming Events',
+    'agenda_new_event' => 'New Event',
+    'agenda_event_name' => 'Event Name',
+    'agenda_event_desc' => 'Description',
+    'agenda_event_date' => 'Date',
+    'agenda_event_visibility' => 'Visibility',
+    'agenda_event_start' => 'Start Time',
+    'agenda_event_end' => 'End Time',
+    'agenda_btn_delete' => 'Delete',
+    'agenda_btn_save' => 'Save Event',
+
+
+
+    // -- PROFILE PAGE (Additions) --
+    'profile_no_bio' => 'No bio yet.',
+    'profile_earth' => 'Earth',
+    'profile_joined' => 'Joined',
+    'tab_events' => 'Events',
+    'profile_no_posts' => 'No posts yet.',
+    'profile_delete_post_title' => 'Delete post',
+    'profile_no_events' => 'No events found.',
+    'profile_add_event_link' => 'Add an appointment in the agenda',
+    'profile_event_untitled' => 'Untitled',
+    'profile_event_label' => 'Description: ',
+    'profile_event_no_desc' => 'No description',
+    'profile_no_media' => 'No media uploaded.',
+    'profile_banner_rec' => 'Recommended size: 1200x300px',
+    'profile_confirm_delete' => 'Do you really want to delete this post?',
+    'profile_error_delete' => 'Error during deletion: ',
+
+
+    // -- AJAX MESSAGES --
+    'ajax_me' => 'Me',
+    'ajax_error' => 'An error occurred',
+
+
+
+    // -- AJAX POST CREATION ERRORS --
+    'ajax_err_session' => 'Session expired.',
+    'ajax_err_empty' => 'Text is empty.',
+    'ajax_err_size' => 'The image is too large for the server (Max ~2MB).',
+    'ajax_err_upload' => 'Error during image transfer.',
+    'ajax_err_format' => 'Unsupported image format.',
+    'ajax_err_storage' => 'Server storage error.',
+
+
+    // -- AJAX DELETE ERRORS --
+    'ajax_err_unauthorized' => 'Unauthorized action.',
+    'ajax_err_not_found' => 'Post not found.',
+
+
+    // -- AJAX FOLLOW ERRORS/SUCCESS --
+    'ajax_follow_success' => 'Followed successfully',
+    'ajax_unfollow_success' => 'Unfollowed successfully',
+
+    // -- AJAX COMMENTS --
+    'ajax_no_comments' => 'No comments yet. Be the first!',
+
+    'ajax_err_unauthorized' => 'Unauthorized action.',
+
+    // -- FEED / POSTS --
+    'btn_send' => 'Send',
+    'feed_show_all' => 'Show all',
+    'feed_comments' => 'comments...',
+
+    // -- AJAX LIKES --
+    'ajax_liked_success' => 'Post liked',
+    'ajax_unliked_success' => 'Post unliked',
 
 
 ];

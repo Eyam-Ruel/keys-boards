@@ -13,13 +13,13 @@ class VueHome {
             
             <link rel="stylesheet" href="css/footer.css">
             <link rel="stylesheet" href="css/home.css">
+            <link rel="icon" type="image/png" href="img/favicon.ico">
             
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
             
             <style>
-                /* --- COPIE EXACTE DU STYLE DE L'APP POUR LE HEADER --- */
                 :root {
                     --bg-topbar: #FFFFFF;
                     --text-dark: #2F0610;
@@ -30,7 +30,7 @@ class VueHome {
                 body { 
                     margin: 0; 
                     padding: 0; 
-                    background: white !important; /* On force le fond blanc pour la landing page */
+                    background: white !important; 
                     font-family: 'DM Sans', sans-serif;
                 }
 
@@ -201,6 +201,44 @@ class VueHome {
                     background-color: var(--border-soft);
                     color: var(--accent);
                 }
+
+                .video--container {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+.video--container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px; /* Pour garder l'esthétique de ton site */
+
+
+}
+
+@media (max-width: 768px) {
+    /* On cible spécifiquement l'image coupable dans la section "Who" */
+    .public--whoSection--content img {
+        width: 100% !important; /* Elle prend toute la largeur du téléphone */
+        max-width: 100% !important;
+        height: auto !important; /* Garde les proportions sans écraser l'image */
+        display: block;
+    }
+
+    /* Sécurité supplémentaire pour empêcher tout le body de swiper */
+    body, html {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        position: relative;
+    }
+    
+    .public--main--wrapper {
+        overflow-x: hidden;
+    }
+}
             </style>
         </head>
 
@@ -237,13 +275,13 @@ class VueHome {
                 <div class="topbar-right">
                     <div class="topbar-icons">
                         <button class="circle-btn">
-                            <img src="./img/icons/Icon.png" alt="Theme" class="topbar-icon-img">
+                            <img src="./img/icons/Light Mode.png" alt="Theme" class="topbar-icon-img">
                         </button>
                         
                         <div class="lang-dropdown-container">
-                            <button class="circle-btn" id="langToggleBtn" title="Changer de langue" style="font-size: 18px;">
-                                🌍
-                            </button>
+                        <button class="circle-btn" id="langToggleBtn" title="Changer de langue">
+    <img src="img/icons/Language.png" alt="Language icon" class="topbar-icon-img">
+</button>
                             <div class="lang-menu" id="langMenu">
                                 <a href="?lang=en" class="lang-option">🇬🇧 English</a>
                                 <a href="?lang=fr" class="lang-option">🇫🇷 Français</a>
@@ -268,21 +306,25 @@ class VueHome {
                 </section>
 
                 <section class="public--videoSection">
-                    <div class="public--videoSecion--content">
-                        <h2><?= $trad['video_title'] ?? 'Discover Keys&Boards in Video' ?></h2>
-                        <div class="video--container">
-                            <video id="Video" class="video" poster="img/videoThumbnail.png">
-                                <source src="video/test.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la balise vidéo.
-                            </video>
-                            <button id="playBtn" class="play-btn">
-                                <svg viewBox="0 0 24 24" fill="white" width="35px" height="35px">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </section>
+    <div class="public--videoSecion--content">
+        <h2><?= $trad['video_title'] ?? 'Discover Keys&Boards in Video' ?></h2>
+        <div class="video--container">
+            <iframe 
+                id="Video" 
+                class="video" 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/TGzlhoFVwE0?si=f993WPUq-eGWCLp4" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
+
+            </div>
+    </div>
+</section>
 
                 <section class="public--whySection">
                     <div class="public--whySection--content">
@@ -312,7 +354,9 @@ class VueHome {
                     <div class="public--whoSection--content">
                         <h2><?= $trad['target_title'] ?? 'Who is Keys & Boards for?' ?></h2>
                         <p class="public--text"><?= $trad['target_subtitle'] ?? 'LinkUp is the intergenerational platform that brings together all music lovers, regardless of age or skill level. From Gen Z to Seniors, everyone has a place in our community.' ?></p>
-                        <img src="img/who.png" alt="whoPiano" style="border-radius: 16px;">
+                        <div class="who--image--container">
+    <img src="img/who.png" alt="whoPiano">
+</div>
                         <div class="ages--container">
                             <div class="age genZ white">
                                 <span><img src="img/headphone.png" alt="headphone"></span>
@@ -395,6 +439,7 @@ class VueHome {
             </footer>
 
             <script>
+                
                 // --- GESTION DE LA VIDÉO ---
                 const videoContainer = document.querySelector('.video--container');
                 const video = document.getElementById('Video');
